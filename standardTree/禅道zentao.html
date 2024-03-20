@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta content="webkit" name="renderer"/>
+  <title>
+   用户登录 - 禅道
+  </title>
+  <script>
+   window.config={"webRoot":"\/","debug":false,"appName":"","cookieLife":30,"requestType":"PATH_INFO","requestFix":"-","moduleVar":"m","methodVar":"f","viewVar":"t","defaultView":"html","themeRoot":"\/theme\/","currentModule":"user","currentMethod":"login","clientLang":"zh-cn","requiredFields":"","router":"\/index.php","save":"\u4fdd\u5b58","runMode":"","timeout":30000,"pingInterval":""};
+window.lang={"submitting":"\u7a0d\u5019...","save":"\u4fdd\u5b58","expand":"\u5c55\u5f00\u5168\u90e8","timeout":"\u8fde\u63a5\u8d85\u65f6\uff0c\u8bf7\u68c0\u67e5\u7f51\u7edc\u73af\u5883\uff0c\u6216\u91cd\u8bd5\uff01"};
+  </script>
+  <script>
+   config.onlybody = "no";
+  </script>
+  <link href="/theme/default/zh-cn.default.css?v=12.5.3" media="screen" rel="stylesheet" type="text/css"/>
+  <script src="/js/all.js?v=12.5.3">
+  </script>
+  <style>
+   #featurebar ul.nav li .chosen-container a.chosen-single{background:#F8FAFE; border:none; -webkit-box-shadow:none;box-shadow:none; padding-top:5px;}
+.w-verifyPassword {width: 120px !important;}
+.w-enVerifyPassword {width: 150px !important;}
+body {background: #1183fb linear-gradient(-90deg, #0a48d1 0%, #1183fb 100%); background-color: #1183fb;}
+#login {max-width: 600px!important; margin: 0 auto; margin-top: 5%;}
+#loginPanel {background: #fff; overflow: hidden; box-shadow: 0 0 20px 0 rgba(0,0,0,.1); border-radius: 3px;}
+#loginPanel > header {padding: 20px; border-bottom: 1px #eee solid; position: relative;}
+#loginPanel > header > h2 {font-size: 16px; margin: 0; line-height: 32px; max-width: 83%;}
+#loginPanel > header > .actions {position: absolute; right: 20px; top: 20px;}
+#loginPanel > .table-row {margin: 20px 0;}
+#loginPanel .table-form > tbody > tr > th {width: 60px;}
+html[lang='en'] #loginPanel .table-form > tbody > tr > th {width: 80px;}
+#loginPanel form {margin-right: 40px;}
+#loginPanel > footer {background: #eee; padding: 20px; color: #838a9d}
+#loginPanel > footer a {display: inline-block; margin-left: 5px;}
+#info {margin-top: 10px; color: #fff;}
+#info .btn + .btn {margin-left: 5px;}
+#langs > .btn,
+#langs > .dropdown-menu {min-width: 0; width: 85px;}
+
+#logo-box img{margin-left:40px; width: 100px;}
+
+.showNotice{color:yellow;}
+.showNotice:hover{color:yellow;}
+  </style>
+  <link href="/favicon.ico" rel="icon" type="image/x-icon"/>
+  <link href="/favicon.ico" rel="shortcut icon" type="image/x-icon"/>
+  <!--[if lt IE 10]>
+<script src='/js/jquery/placeholder/min.js?v=12.5.3'></script>
+<![endif]-->
+ </head>
+ <body>
+  <script src="/js/md5.js?v=12.5.3">
+  </script>
+  <main class="fade" id="main">
+   <div class="container" id="login">
+    <div id="loginPanel">
+     <header>
+      <h2>
+       禅道软件项目管理系统
+      </h2>
+      <div class="actions dropdown dropdown-hover" id="langs">
+       <button class="btn" title="Change Language/更换语言/更換語言" type="button">
+        简体
+        <span class="caret">
+        </span>
+       </button>
+       <ul class="dropdown-menu pull-right">
+        <li>
+         <a class="switch-lang" data-value="zh-cn">
+          简体
+         </a>
+        </li>
+        <li>
+         <a class="switch-lang" data-value="zh-tw">
+          繁體
+         </a>
+        </li>
+        <li>
+         <a class="switch-lang" data-value="en">
+          English
+         </a>
+        </li>
+        <li>
+         <a class="switch-lang" data-value="de">
+          Deutsch
+         </a>
+        </li>
+        <li>
+         <a class="switch-lang" data-value="fr">
+          Français
+         </a>
+        </li>
+        <li>
+         <a class="switch-lang" data-value="vi">
+          Tiếng Việt
+         </a>
+        </li>
+        <li>
+         <a class="switch-lang" data-value="ja">
+          日本語
+         </a>
+        </li>
+       </ul>
+      </div>
+     </header>
+     <div class="table-row">
+      <div class="col-4 text-center text-middle">
+       <img alt="" src="/theme/default/images/main/zt-logo.png"/>
+      </div>
+      <div class="col-8">
+       <form method="post" target="hiddenwin">
+        <table class="table table-form">
+         <tbody>
+          <tr>
+           <th>
+            用户名
+           </th>
+           <td>
+            <input autofocus="" class="form-control" id="account" name="account" type="text" value="demo"/>
+           </td>
+          </tr>
+          <tr>
+           <th>
+            密码
+           </th>
+           <td>
+            <input class="form-control" name="password" type="password" value="quickon4You"/>
+           </td>
+          </tr>
+          <tr>
+           <th>
+           </th>
+           <td id="keeplogin">
+            <div class="checkbox-primary">
+             <input id="keepLoginon" name="keepLogin[]" type="checkbox" value="on"/>
+             <label for="keepLoginon">
+              保持登录
+             </label>
+            </div>
+           </td>
+          </tr>
+          <tr>
+           <td>
+           </td>
+           <td class="form-actions">
+            <button class="btn btn-primary" data-loading="稍候..." id="submit" type="submit">
+             登录
+            </button>
+            <input id="referer" name="referer" type="hidden" value="/"/>
+            <a href="/user-reset.html">
+             忘记密码
+            </a>
+           </td>
+          </tr>
+         </tbody>
+        </table>
+       </form>
+      </div>
+     </div>
+     <footer>
+      <span>
+       使用demo帐号登录：
+      </span>
+     </footer>
+    </div>
+    <p style="margin-top:25px; color:#fff; text-align:center">
+     版本选择：
+     <a href="https://zentao12biz.demo.haogs.cn" style="color:yellow">
+      企业版
+     </a>
+    </p>
+    <div class="table-row" id="info">
+     <div class="table-col text-middle text-center">
+      <div id="poweredby">
+       <iframe allowtransparency="true" class="hidden" frameborder="0" id="updater" scrolling="no" src="https://api.zentao.net/updater-isLatest-12.5.3-.html?lang=zh_cn" width="100%">
+       </iframe>
+       <input id="verifyRand" name="verifyRand" type="hidden" value="1239256043"/>
+      </div>
+     </div>
+    </div>
+   </div>
+  </main>
+  <iframe class="debugwin hidden" frameborder="0" id="hiddenwin" name="hiddenwin" scrolling="no">
+  </iframe>
+  <script>
+   /**
+ * Switch account
+ *
+ * @param  string $account
+ * @param  string $method
+ * @access public
+ * @return void
+ */
+$(document).ready(function()
+{
+    var verifyEncrypted = false;
+    $('#verifyPassword').change(function(){verifyEncrypted = false})
+    $('#verifyPassword').closest('form').find('#submit').click(function()
+    {
+        var password = $('input#verifyPassword').val().trim();
+        var rand = $('input#verifyRand').val();
+        if(!verifyEncrypted && password) $('input#verifyPassword').val(md5(md5(password) + rand));
+        verifyEncrypted = true;
+    });
+});
+
+function switchAccount(account, method)
+{
+    if(method == 'dynamic')
+    {
+        link = createLink('user', method, 'period=' + period + '&account=' + account);
+    }
+    else if(method == 'todo')
+    {
+        link = createLink('user', method, 'account=' + account + '&type=' + type);
+    }
+    else
+    {
+        link = createLink('user', method, 'account=' + account);
+    }
+    location.href=link;
+}
+
+var mailsuffix = '';
+var account    = [];
+function setDefaultEmail(num)
+{
+    var mailValue = $('.email_' + num).val();
+    if(mailValue.indexOf('@') <= 0) return;
+    if(mailValue.indexOf('@') > 0) mailValue = mailValue.substr(mailValue.indexOf('@'));
+    mailsuffix = mailValue;
+}
+
+function changeEmail(num)
+{
+    var mailValue = $('.email_' + num).val();
+    if(mailsuffix != '' && (mailValue == '' || mailValue == account[num] + mailsuffix)) $('.email_' + num).val($('.account_' + num).val() + mailsuffix);
+    account[num] = $('.account_' + num).val();
+}
+
+function checkPassword(password)
+{
+    $('#passwordStrength').html(password == '' ? '' : passwordStrengthList[computePasswordStrength(password)]);
+    $('#passwordStrength').css('display', password == '' ? 'none' : 'table-cell');
+}
+// Prevent login page show in a iframe modal
+if(window.self !== window.top) window.top.location.href = window.location.href;
+
+$(document).ready(function()
+{
+    /* Fix bug for misc-ping */
+    $('#hiddenwin').removeAttr('id');
+
+    var $login = $('#login');
+    var adjustPanelPos = function()
+    {
+        var bestTop = Math.max(0, Math.floor($(window).height() - $login.outerHeight())/2);
+        $login.css('margin-top', bestTop);
+    };
+    adjustPanelPos();
+    $(window).on('resize', adjustPanelPos);
+
+    $('#account').focus();
+
+    $("#langs li > a").click(function() 
+    {
+        selectLang($(this).data('value'));
+    });
+
+    $('#loginPanel #submit').click(function()
+    {
+        var account          = $('#account').val().trim();
+        var password         = $('input:password').val().trim();
+        var passwordStrength = computePasswordStrength(password);
+
+        var hasMD5    = typeof(md5) == 'function';
+        var rand      = $('input#verifyRand').val();
+        var referer   = $('#referer').val();
+        var link      = createLink('user', 'login');
+        var keepLogin = $('#keepLoginon').attr('checked') == 'checked' ? 1 : 0;
+
+        $.ajax
+        ({
+            url: link,
+            dataType: 'json',
+            method: 'POST',
+            data: 
+            {
+                "account": account, 
+                "password": hasMD5 ? md5(md5(password) + rand) : password,
+                'passwordStrength' : passwordStrength,
+                'referer' : referer,
+                'verifyRand' : rand,
+                'keepLogin' : keepLogin,
+            },
+            success:function(data)
+            {
+                if(data.result == 'fail') 
+                {
+                    alert(data.message);
+                    return false;
+                }
+                else
+                {
+                    location.href = data.locate;
+                }
+            }
+        })
+
+        return false;
+    });
+});
+
+/**
+ * Show notice for one click package use weak password.
+ * 
+ * @access public
+ * @return void
+ */
+function showNotice()
+{
+    if(typeof(process4Safe) == 'string') bootbox.alert(process4Safe)
+}
+  </script>
+ </body>
+</html>

@@ -1,6 +1,14 @@
-# 2023CISCN
+# tha1_Lighthouse
 
-## 用Linux系统作测试
+## 简介
+
+Lighthouse 灯塔，一个开源资产测绘平台
+
+支持的功能包括：ip的端口/协议/服务探测，基于dom树的网络框架识别，兼容fofa/QUAKE数据，
+支持mysql/sqlite，基于云的分布式高并发扫描
+
+## cloud distributed scanning
+基于云的分布式扫描
 
 ```bash
 docker build -t cicsn .
@@ -9,7 +17,8 @@ docker-compose up -d
 #你可以更改其中的replicas参数来启用多个容器实现并发扫描
 ```
 
-## 命令
+## Command
+命令
 
 ```bash
 python main.py <OPTIONS>
@@ -17,6 +26,13 @@ python main.py <OPTIONS>
 python json.py <FILENAME>
 #导出文件，FILENAME为导出文件名，默认为output.json
 ```
+
+第一次记得选定数据库（--mysql/sqlite），第二次运行会追加在之前的结果中
+
+全量扫描顺序（不按照顺序会缺少上游数据无法运行）：1.指定数据库 2.scan 3.port 4.service
+
+
+
 OPTIONS有如下：
 
 `--mysql` 使用MYSQL模块（支持分布式），默认使用为SQLITE模块（不支持分布式）

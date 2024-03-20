@@ -108,6 +108,15 @@ class db:
         for i in cursor:
             return i[0], i[1]
 
+    def get_ip_no_services_have_http(self, target):
+        self.logger.debug("DB: get_ip_no_services_have_http %s" % (target,))
+        cursor = self.db.execute("SELECT IP,PORT from SERVICES WHERE METHOD NOT LIKE ? AND (PROTOCOL LIKE '%HTTP%' OR PROTOCOL LIKE '%HTTPS%')  LIMIT 1",
+                                 ("%@#" + target + "%",))
+        self.db.commit()
+        for i in cursor:
+            return i[0], i[1]
+
+
     def add_honeypot(self, target1, target2):
         self.logger.debug("DB: add_honeypot %s %s" % (target1, target2))
         cursor = self.db.execute(

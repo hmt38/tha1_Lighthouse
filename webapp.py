@@ -4,8 +4,87 @@ import time
 import nmap
 import json
 
-class method_kscan:
-    name = "service-kscan"
+# class method_kscan:
+#     name = "service-kscan"
+#
+#     def __init__(self, db, logger):
+#         self.db = db
+#         self.logger = logger
+#         import os
+#
+#         if os.name == 'posix':
+#             if not os.path.exists('tools/kscan/kscan'):
+#                 self.logger.warning("SERVICES: kscan not found")
+#             else:
+#                 self.logger.info("SERVICES: kscan found")
+#
+#         elif os.name == 'nt':
+#             if not os.path.exists('tools/kscan/kscan.exe'):
+#                 self.logger.warning("SERVICES: kscan not found")
+#             else:
+#                 self.logger.info("SERVICES: kscan found")
+#         else:
+#             self.logger.info("SERVICES: kscan not support")
+#
+#     def randstr(self,len=8):
+#         import string
+#         import random
+#         d=string.ascii_letters + string.digits
+#         str_list = [random.choice(d) for i in range(len)]
+#         random_str = ''.join(str_list)
+#         return random_str
+#     def services(self, ip,port):
+#         import os
+#         import output
+#         import subprocess
+#         if os.name == 'nt':
+#             cmd="tools\\kscan\\kscan.exe"
+#             file = 'tmp\\kscan\\'
+#         elif os.name == 'posix':
+#             cmd="tools/kscan/kscan"
+#             file = 'tmp/kscan/'
+#
+#         if not os.path.exists(file):
+#             os.mkdir(file)
+#
+#         name = self.randstr()+'.txt'
+#         cmd = cmd + f" --target {ip} --port {port} -oJ {file+name}"
+#
+#         result = subprocess.run(cmd, shell=True, capture_output=True)
+#
+#         if result.returncode == 0:
+#             self.logger.debug("SERVICE: kscan run")
+#             with open(file+name, "rb") as f:
+#                 load = f.read()
+#                 self.logger.debug("SERVICE: "+ load.decode("UTF-8"));
+#                 json1 = json.loads(load)
+#                 print(json1)
+#                 try:
+#                     self.db.add_protocol(ip, port, json1[0]['Service'])
+#                 except Exception:
+#                     pass
+#
+#                 try:
+#                     self.db.add_service_app(ip, port, json1[0]['FingerPrint'])
+#                 except Exception:
+#                     pass
+#
+#                 try:
+#                     try:
+#                         version = json1[0]['Version']
+#                     except Exception:
+#                         version = 'N'
+#                     self.db.add_service_app(ip, port, json1[0]['ProductName']+'/'+version)
+#                 except Exception:
+#                     pass
+#
+#             return None,None
+#         else:
+#             self.logger.warning("SERVICE: kscan error")
+#             return None,None
+
+class method_Dom:
+    name = "webapp-Dom"
 
     def __init__(self, db, logger):
         self.db = db
@@ -13,97 +92,18 @@ class method_kscan:
         import os
 
         if os.name == 'posix':
-            if not os.path.exists('tools/kscan/kscan'):
-                self.logger.warning("SERVICES: kscan not found")
+            if not os.path.exists("standardTree\\wordpress.html"):
+                self.logger.warning("SERVICES: standardTree not found")
             else:
-                self.logger.info("SERVICES: kscan found")
+                self.logger.info("SERVICES: standardTree found")
 
         elif os.name == 'nt':
-            if not os.path.exists('tools/kscan/kscan.exe'):
-                self.logger.warning("SERVICES: kscan not found")
+            if not os.path.exists("standardTree/wordpress.html"):
+                self.logger.warning("SERVICES: standardTree not found")
             else:
-                self.logger.info("SERVICES: kscan found")
+                self.logger.info("SERVICES: standardTree found")
         else:
-            self.logger.info("SERVICES: kscan not support")
-
-    def randstr(self,len=8):
-        import string
-        import random
-        d=string.ascii_letters + string.digits
-        str_list = [random.choice(d) for i in range(len)]
-        random_str = ''.join(str_list)
-        return random_str
-    def services(self, ip,port):
-        import os
-        import output
-        import subprocess
-        if os.name == 'nt':
-            cmd="tools\\kscan\\kscan.exe"
-            file = 'tmp\\kscan\\'
-        elif os.name == 'posix':
-            cmd="tools/kscan/kscan"
-            file = 'tmp/kscan/'
-
-        if not os.path.exists(file):
-            os.mkdir(file)
-
-        name = self.randstr()+'.txt'
-        cmd = cmd + f" --target {ip} --port {port} -oJ {file+name}"
-
-        result = subprocess.run(cmd, shell=True, capture_output=True)
-
-        if result.returncode == 0:
-            self.logger.debug("SERVICE: kscan run")
-            with open(file+name, "rb") as f:
-                load = f.read()
-                self.logger.debug("SERVICE: "+ load.decode("UTF-8"));
-                json1 = json.loads(load)
-                print(json1)
-                try:
-                    self.db.add_protocol(ip, port, json1[0]['Service'])
-                except Exception:
-                    pass
-
-                try:
-                    self.db.add_service_app(ip, port, json1[0]['FingerPrint'])
-                except Exception:
-                    pass
-
-                try:
-                    try:
-                        version = json1[0]['Version']
-                    except Exception:
-                        version = 'N'
-                    self.db.add_service_app(ip, port, json1[0]['ProductName']+'/'+version)
-                except Exception:
-                    pass
-
-            return None,None
-        else:
-            self.logger.warning("SERVICE: kscan error")
-            return None,None
-
-class method_fscan:
-    name = "service-fscan"
-
-    def __init__(self, db, logger):
-        self.db = db
-        self.logger = logger
-        import os
-
-        if os.name == 'posix':
-            if not os.path.exists("tools\\fscan\\fscan.exe"):
-                self.logger.warning("SERVICES: fscan not found")
-            else:
-                self.logger.info("SERVICES: fscan found")
-
-        elif os.name == 'nt':
-            if not os.path.exists("tools/fscan/fscan"):
-                self.logger.warning("SERVICES: fscan not found")
-            else:
-                self.logger.info("SERVICES: fscan found")
-        else:
-            self.logger.info("SERVICES: fscan not support")
+            self.logger.info("SERVICES: standardTree not support")
 
     def Oslist(self,file):
         import re
@@ -165,13 +165,11 @@ class method_fscan:
 
 
 class app:
-    def __init__(self, db, logger,method='service-kscan'):
+    def __init__(self, db, logger,method='webapp-Dom-based'):
         self.db = db
         self.logger = logger
-        if method == 'service-fofa':
-            self.method = method_fofa(db,logger)
-        elif method == "services-fscan-protocol":
-            self.method = method_fscan(db,logger)
+        if method == 'webapp-Dom-based':
+            self.method = method_Dom(db,logger)
         else:
             self.method = method_kscan(db,logger)
 
@@ -179,9 +177,9 @@ class app:
     def run(self, sleep=60):
         while True:
             try:
-                ip,port = self.db.get_ip_no_services(self.method.name)
+                ip,port = self.db.get_ip_no_services_have_http(self.method.name)
                 if ip is not None:
-                    self.logger.info("SERVICES-CHECK %s %s %s" % (self.method.name,ip,port))
+                    self.logger.info("WEBAPP-CHECK %s %s %s" % (self.method.name,ip,port))
                     self.db.update_ip_services_timestamp(self.method.name,ip,port)
 
                 # try:

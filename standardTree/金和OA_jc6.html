@@ -1,0 +1,1207 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- /jc6/WEB-INF/jsp/platform/sys/login/finallogin.jsp -->
+
+
+
+
+  
+
+
+
+
+  
+<html>
+	<head>
+		<title>JC6金和协同管理平台</title><!-- JC6金和协同管理平台 -->
+		<!-- webapp支持 -->
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<link rel="apple-touch-icon-precomposed" href="../../common/css/base/jcs.png">
+		<link rel="stylesheet" href="../index/styles/assets/font-awesome/css/font-awesome.min.css" type="text/css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			#trChPwd{margin-top:20px;width:500px;}
+		 	#bottomText{width:100%;list-style:none;height:30px;line-height:30px;}
+		 	#bottomText li{float:left;padding:0 5px;}
+		 	#bottomText li span{color:#ffffff !important;}
+		 	#mainUserId,#mainUser{background:#333333;opacity:0.3;}
+		 	#mainUserId input,#mainUser input{font-weight:500;}
+		 	.code{font-family:"宋体";}
+		 	.login_phone_client ul.app-wexi li{padding:0 !important;float:left;} 
+		 	.chkPwd{margin-right:0px;}
+		 	#accounts,#password{color:#ffffff;}
+		</style>
+		<script type="text/javascript">
+			var browser={  
+		    		versions:function(){   
+			           	var u = navigator.userAgent, app = navigator.appVersion;   
+			           	return {//移动终端浏览器版本信息   
+			                trident: u.indexOf('Trident') > -1, //IE内核  
+			                presto: u.indexOf('Presto') > -1, //opera内核  
+			                webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核  
+			                gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核  
+			                mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端  
+			                ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端  
+			                //android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器  
+			                android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1 && u.indexOf('Gecko') == -1 , //android终端或者uc浏览器(演示系统的火狐跳转到手机端登录页所以加上u.indexOf('Gecko') == -1 )
+			                iPhone: u.indexOf('iPhone') > -1 , //是否为iPhone或者QQHD浏览器  
+			                iPad: u.indexOf('iPad') > -1, //是否iPad    
+			                webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部  
+			            };  
+			         }(),  
+		         language:(navigator.browserLanguage || navigator.language).toLowerCase()  
+			}
+			//获取地址栏参数，name:参数名称 
+			function getUrlParms(name){   
+				var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");   
+				var r = window.location.search.substr(1).match(reg);   
+				if(r!=null)   return unescape(r[2]);   return null;   
+			} 
+			if(getUrlParms('from')!="phone"){
+				if(browser.versions.mobile || browser.versions.ios || browser.versions.android ||   
+				  browser.versions.iPhone || browser.versions.iPad){        
+				      window.location ='/jc6/OAPlus/view/login/signIn.html?title=登录&appServer=jc6' ;
+				}
+			} 
+		</script>
+		<link rel="shortcut icon" href="../../common/css/base/jcs_16.ico">
+		<link rel="stylesheet" type="text/css" href="../finallogin/css/finallogin.css">
+		<script>if(top.location != self.location){top.location=self.location;}</script>
+		<script type="text/javascript" src="../../common/js/jquery/jquery-1.5.2.min.js"></script>
+		<script type="text/javascript" src="../../common/js/qrcode/jquery.qrcode.min.js"></script>
+		<script type="text/javascript" src="../../common/js/artDialog/artDialog.js"></script>
+		<script type="text/javascript" src="../finallogin/js/jquery.cookie.js"></script>
+		<script type="text/javascript" src="../finallogin/js/json2.js"></script>
+		<script type="text/javascript" src="../finallogin/js/jquery.jsoncookie.js"></script>
+		<script type="text/javascript" src="../login/js/login.base64code.js"></script>
+		<script type="text/javascript" src="../login/js/login.jsonCookieSet.js"></script>
+		<script type="text/javascript" src="../../common/js/uiCustom/in.js"></script> 
+		<script type="text/javascript" src="../security/js/jcs-security-1.0.1.js"></script>
+	</head>
+<script type="text/javascript">
+
+/**定义login.jsonCookieSet.js用到的全局变量**/
+var CTX = "/jc6";
+var ns_changeAccount="[更改用户]";//更改用户
+
+/**切换语言***/
+function switchLanguage(lan,_this){ 
+	var param=$.param({
+		'lang':lan
+	});	
+	//发起AJAX请求,根据服务器端响应来刷新页面
+	$.ajax({
+		type: "POST",
+		url: "/jc6/platform/sys/login!intro.action",
+		data: param,
+		success: function(date){
+			setTimeout(function(){
+				window.location.href="/jc6/platform/sys/login!intro.action?lang="+lan;//刷新页面
+			},200)	
+		}
+	});
+	//var txt = $(_this).text();
+	//$('.language')[0].firstChild.nodeValue = txt;
+	//setLanguageText(lan);
+}
+
+/**新用户登录********/
+function addNewUser(){
+	jQuery("#accounts").val("");
+	jQuery("#password").val("");
+	jQuery("#current_username").html('');
+ 
+	document.getElementById("chkPwd").checked = false;
+	jQuery('#user_signal').removeClass('current_account');
+	//jQuery('#user_signal').addClass('user_signal');
+	jQuery("#open").html('');
+	//jQuery("#user_signal>img").attr("src","/jc6/platform/finallogin/images/head-user-photo.png");
+	jQuery("#user_signal>img").attr("src","/jc6/platform/finallogin/images/head-add.png");
+	hideList();
+}
+
+/**解决ie8登录时用户头像不显示默认头像的问题********/
+function nofind(){ 
+	var img=event.srcElement; 
+		img.src="/jc6/platform/finallogin/images/head-user-photo.png"; 
+		img.onerror=null;// 控制不要一直跳动 
+} 
+
+function getDynamicPass(){
+	$("#trChPwd").hide();
+	$("#epassCheck").hide();
+	$("#dynamicPass").show();
+	$("#currentLoginType").val("dynamicPass");
+	$(".table_bg").attr("class","table_bg1");
+}
+
+function getEpassCheck(){
+	$("#trChPwd").hide();
+	$("#epassCheck").show();
+	$("#dynamicPass").hide();
+	$("#currentLoginType").val("epassCheck");
+	$(".table_bg").attr("class","table_bg1");
+}
+
+function getPassWord(){
+	$("#epassCheck").hide();
+	$("#dynamicPass").hide();
+	$("#trChPwd").show();
+	$("#currentLoginType").val("normal");
+	$(".table_bg").attr("class","table_bg");
+}
+
+/**加载登录样式**********/
+jQuery(function($){
+	self.moveTo(0,0);
+	self.resizeTo(screen.availWidth,screen.availHeight);
+	var str = '{"bgImgHight":"835","bgImgSrc":"/platform/upload/loginlayout/blue1.png","bgImgWidth":"1440","blank1":"","blank2":"","blank3":"","blank4":"","bodyBgImgColor":"","bodyBgImgSrc":"","commAppId":"","copyrightFontColor":"000","copyrightIsDisplay":"","copyrightLeft":"0","copyrightTop":"0","isDefault":"1","isUse":"1","isUserCustom":"","layoutId":"402898c0339fbd700133a0882ba60024","layoutName":"梦之蓝","loginBoxFontColor":"000","loginBoxLeft":"64%","loginBoxTop":"46%","loginInputStyle":"","loginSetColor":"","loginSetIsDisplay":"","loginSetLeft":"0","loginSetTop":"0","mainBottom":"","mainLeft":"","mainRight":"","mainTop":"","tblLoginLayoutDivs":[],"thumbnail":""}';
+	layOutEntity =  eval("("+str+")");
+	if(!(layOutEntity && layOutEntity.layoutId.length == 32)){
+		 $("#copyby").css("display","none");
+	}
+ 	with(layOutEntity){
+		 if(layOutEntity.isUserCustom && layOutEntity.isUserCustom === "1"){
+		 	//加载自定义
+		 	userCustomer(layOutEntity);
+		 }else{
+		 	//加载推荐
+		 	tuijian(layOutEntity);
+		 }
+	}
+});
+
+/***加载自定义登录样式*/
+function userCustomer(layOutEntity){
+	with(layOutEntity){
+		//先初始化背景图片的位置,读取mainLeft , mainTop ,然后按照比例的显示
+		var mainImg = $(".login_main").css("position","absolute");
+		//mainImg.css({"background":"url('/jc6/download/download!getImage.action?attachmentId="+bgImgSrc+"') no-repeat center",
+			//"width":bgImgWidth+"px","height":bgImgHight+"px","left":"50%","top":"50%","margin":-(bgImgHight*1/2)+"px 0 0 "+(-(bgImgWidth*1/2))+"px"});
+		mainImg.show().css({"background":"url('/jc6/download/download!getImage.action?attachmentId="+bgImgSrc+"') no-repeat center",
+			"left":"0","top":"0","bottom":"0","right":"0","background-size":"cover"});
+		// 初始化背景图片,body , 如果不显示背景图片
+		var bodyBgImgRepeat = blank2.length < 1 ? "repeat" : blank2;
+		$("body").css({"background-color":"#"+bodyBgImgColor});
+		if(blank1 === "0"){
+			$("body").css("background-image","none");
+		}
+		//初始化 loginInput ,copy loginSet和颜色和是否显示问题,读取mainImg所在的位置,然后计算
+		 // loginInput
+		$(".login_body").css({"display":"block","left":(loginBoxLeft)+"px","top":( loginBoxTop ) + "px"});
+		//
+		//$(".login_body").css({"display":"block","left":"50%","top":"45%","position":"absolute"});
+		$(".list_big_container").css({"left":((loginBoxLeft*1)-20)+"px","top":( loginBoxTop) + "px"});
+		 
+		//登陆设置显示
+		 $(".login_header").css({"display":("none"),
+		 					"color":"#"+loginSetColor,
+		 					"left":loginSetLeft+"px",
+		 					"top":loginSetTop+"px"});
+		 $(".r_loginBoxFontColor").css("color","#"+loginBoxFontColor);
+		 $(".r_setColor").css("color","#"+loginSetColor);
+		 //$('#chkPwd').next().css('color','#ffffff');
+		 $('#chkPwd').next().find('a').css('color','#ffffff');
+		 //版权信息 
+		 $("#copyby").css({"display":"none"});//写死不显示
+		 //$("#copyby").css({"display":(copyrightIsDisplay === "1" ? "block":"none")});//设置控制显示
+		 $("#copyby").css({"left":copyrightLeft+"px",
+		 				"top":copyrightTop+"px",
+		 				"color":"#"+copyrightFontColor});
+		 $(".login_logo").css("display","none");
+	}
+}
+
+/**加载推荐登录***/
+function tuijian(layOutEntity){
+	with(layOutEntity){
+	 		if(!bgImgSrc) return;
+			//$(".login_header").css({"left":loginSetLeft+"px","top":loginSetTop+"px"});
+			//$(".login_main").css({"background-image":"url('"+"/jc6"+bgImgSrc+"')","height":bgImgHight+"px","width":bgImgWidth+"px","left":-(bgImgWidth*1/2)+"px"});
+			//$(".login_main").show().css({"background":"url('"+"/jc6"+bgImgSrc+"') no-repeat center","height":bgImgHight+"px","width":bgImgWidth+"px","left":"50%","top":"50%","margin":-(bgImgHight*1/2)+"px 0 0 "+(-(bgImgWidth*1/2))+"px"});
+			$(".login_main").show().css({"background":"url('"+"../../../jc6"+bgImgSrc+"') no-repeat center","left":"0","top":"0","bottom":"0","right":"0","background-size":"cover","position":"fixed"});
+			var w1 = window.screen.width;
+			if(!loginBoxLeft.indexOf("%")){
+				$(".login_body").css({"display":"block","left":loginBoxLeft-65+"px","top":loginBoxTop+"px"});
+			}else{
+				var le = loginBoxLeft.split("%")[0];
+				var u = navigator.userAgent;
+				var isSafari = u.indexOf('Safari');
+				if(isSafari){
+					if(w1>1366 && w1<=1440){
+						$("#loginInput").css({"left":le-2+"%","position":"absolute !important","top":"47%"});
+						$(".login_body").css({"position":"absolute"});
+					}else if(w1<=1366){
+						$("#loginInput").css({"left":le-3+"%","position":"absolute !important","top":"41.8%"});
+						$(".login_body").css({"position":"absolute"});
+					}else if(w1>1440 && w1<=1600){
+						$("#loginInput").css({"left":le-1+"%","position":"absolute !important","top":"47.8%"});
+						$(".login_body").css({"position":"absolute"});
+					}
+					else{
+						$(".login_body").css({"display":"block","left":loginBoxLeft,"top":loginBoxTop});
+						$(".login_body").css({"position":"absolute"});
+					}
+				}else{
+					if(w1>1366 && w1<=1440){
+						$("#loginInput").css({"left":le-2+"%","position":"absolute","top":"47%"});
+					}else if(w1<=1366){
+						$("#loginInput").css({"left":le-3+"%","position":"absolute","top":"41.8%"});
+					}else if(w1>1440 && w1<=1600){
+						$("#loginInput").css({"left":le-1+"%","position":"absolute","top":"42.8%"});
+					}
+					else{
+						$(".login_body").css({"display":"block","left":loginBoxLeft,"top":loginBoxTop});
+					}
+				}
+				//$(".login_body").css({"display":"block","left":loginBoxLeft,"top":loginBoxTop});
+				
+			}
+		 	if(bgImgSrc && bgImgSrc.indexOf("jcs") != -1 && bgImgSrc.indexOf("login_1000_600") != -1){
+			} else{
+				$(".login_logo").css("display","none");
+			}
+		 	$("body").css("background","#"+bodyBgImgColor);
+			$(".list_big_container").css("left",(layOutEntity.loginBoxLeft*1-30)+"px").css("top",(layOutEntity.loginBoxTop*1-20
+				)+"px");
+			var fix_height =  (($(window).height() - bgImgHight)/2);
+			/*if(fix_height >= 50){
+				$(".login_main").css("top",(fix_height - 50) +"px");
+			}*/
+			//版权信息
+			$("#copyby").css({"display":"none"});//写死不显示
+			//$("#copyby").css({"display":"block"});//设置控制显示
+			$("#copyby").css({"left":copyrightLeft+"px",
+							"top":copyrightTop+"px","color":"#"+copyrightFontColor});
+		}
+}
+	
+</script>
+	<body style="overflow:hidden;">
+
+	<form action="form1" method="post" name="form1" autocomplete="off">
+		<input type="hidden" id="random" name="random" value="">
+		<input type="hidden" id="digest" name="digest" value="">
+		<input type="hidden" id="snserial" name="snserial" value="">
+		<input type="hidden" id="signNumber" name="signNumber" value="">
+		<input type="hidden" id="cert" name="cert" value="">
+		<input type="hidden" id="randomNumber" name="randomNumber" value="">
+		<input type="hidden" id="currentLoginType" name="currentLoginType" value="normal">
+ 
+			<div class="login_main" style="display:none">
+				
+				<div class="login_header">
+					
+					
+							
+				</div>
+
+				
+				
+				<div class="login_logo" style="display:none;"></div>
+				
+				
+				
+				<!-- <div class="login_body" style="display:none;">
+					
+					<div class="login-wrapper">
+						 		<div class="login_title">
+									<p>手机客户端</p>
+						 		</div>
+						 		<div class="login_phone_client">
+						 			<div class="caret_wrapper"><span id="caret"></span></div>
+					 				<ul class="app-wexi">
+					 					<li class="wx-box">
+					 						<div class="wx-left" id="wx-left">
+					 							<img src="/jc6/platform/finallogin/images/app.png" alt="" />
+				 							</div>
+					 						<div class="wx-right">
+												<p class="wx-title">APP</p>
+												<ul class="wx-systom">
+													<li style="margin-left:15px"><img src="/jc6/platform/finallogin/images/iphone.png" alt="" /></li>
+													<li><img src="/jc6/platform/finallogin/images/android.png" alt="" /></li>
+												</ul>
+					 						</div>
+					 					</li>
+					 					<li class="wx-box">
+					 						<div class="wx-left">
+					 							<img src="/jc6/platform/finallogin/images/app.png" alt="" />
+				 							</div>
+					 						<div class="wx-right">
+												<p class="wx-title">关注微信</p>
+												<p class="wx-oa">微信办公更方便</p>
+					 						</div>
+					 					</li>
+					 				</ul>
+						 		</div>
+							 		</div>
+							 		<div class="user_signal">
+						<div  id="user_signal">
+							<img src="" alt="" onerror="nofind();"/>
+						</div>			
+					</div>
+					<div class="login_cont">
+						登录首页,登录失败信息提示区域
+						<div class="error_wrap">
+							<div class="login_error" style="display:none;">
+								<span class='login_error_right' id="login_error" style="font-family:'宋体'"></span>
+							</div>
+						</div>
+						
+						<div class="user_info">
+							<a class="change_account" id="open">[更改用户]</a>
+							<p class="username"><span id="current_username"></span></p>
+						</div>
+						<div class="login_right">							
+								<div class="table_bg">									
+									<div id="mainTable">
+										<div  id="mainUserId" class="formLi">
+											<span class="r_loginBoxFontColor">用户名:</span>
+											<div class="select_ico" onclick="showList();"></div>
+											<img src="/jc6/platform/finallogin/images/user.png"/>
+											
+											
+												<input type="text" name="accounts" id="accounts" ondblclick="tabUser()"/>
+											
+										</div>
+										<div id="mainUser" class="formLi">
+											<span class="r_loginBoxFontColor">密码:</span>
+											<img src="/jc6/platform/finallogin/images/pasword.png"/>
+											
+											
+												<input type="password" name="password" id="password"  onfocus = "this.value = ''"/>
+											
+										</div>
+										<div id="dynamicPass" style="display:none" class="formLi">
+											<span class="r_loginBoxFontColor">
+												动态密码:
+											</span>
+											<input type="text" name="snNo" id="snNo"  onfocus = "this.value = ''"/>
+										</div>
+										<div id="epassCheck" style="display:none" class="formLi">
+											<span class="r_loginBoxFontColor">PIN&nbsp;&nbsp;&nbsp;码:</span>
+											<input type="password" name="pinNo" id="pinNo"  onfocus = "this.value = ''"/>
+										</div>
+										<div id="trChPwd" class="trChPwd">	
+												<span class="r_loginBoxFontColor trChPwd_span" style="font-family:'宋体'">
+													<input type="checkbox" id="chkPwd" name="chkPwd" class="chkPwd" />记住密码
+												</span>
+												<a onclick="changePassword();" class="r_loginBoxFontColor" style="font-family:'宋体'">修改密码</a>												
+										</div>
+										<div class="login_button" onclick="login_servlet();">登录</div>
+										<div class="assist">
+											<span class="language" onclick="showChoiceLanguage();">简体中文<i class="fa fa-chevron-down"></i></span>
+											切换语言结构
+											<div class="choice_language">
+												
+													<span class="r_setColor" lang="zh_CN" onclick="switchLanguage('zh_CN',this);">简体中文</span>
+												
+													<span class="r_setColor" lang="zh_TW" onclick="switchLanguage('zh_TW',this);">繁体中文</span>
+												
+													<span class="r_setColor" lang="en_US" onclick="switchLanguage('en_US',this);">English</span>
+												
+											</div> 
+										</div>	
+									</div>
+								</div>						
+						</div>
+						
+						<input type="hidden" name="signal" value="" id="signal" />
+						<div id="signal"></div>
+						
+					</div>
+					<div class="qrcImgWrap">
+						<p>方便 快捷 安全</p>
+						<div id="qrcImg" class="qrcImg"></div>
+						<p>打开APP</p>
+						<p>扫描二维码</p>
+					</div>
+					<div class="qrcImgWrap" style="left:0;">
+						<div id="qrcImg" class="qrcImg" style="left:20px; top:37px;width:310px;height:145px;">
+						</div>
+						<p style="position:absolute;width:140px;z-index:10;color:#000000;font-size: 12px;left:38px;bottom:3px;">
+							打开APP扫描登录
+						</p>
+						<div class="rightimg" style="position:absolute;height: 100px; width: 100px;right:19px;top:76px;">
+							<img src="/jc6/platform/finallogin/images/1.png" alt="" />
+							<p style="position:absolute;width:140px;z-index:10;color:#000000;font-size: 12px;left:-21px;bottom:-27px;">
+								扫描下载APP
+							</p>
+						</div>
+					</div>
+				
+					<div onclick="login_qrc();" class="qrc"></div>
+				</div> -->
+				<div class="login_list" style="display:none;">登录历史下拉列表</div>
+				<div class="login_body" id="loginInput" class="ui-custom-loginlayout-input login_body" style="position:relative;">
+					 		<div class="login-wrapper">
+						 		<!-- <div class="login_title">
+						 											<p>手机客户端</p>
+						 		</div> -->
+						 		<!-- <div class="login_phone_client">
+						 			<div class="caret_wrapper"><span id="caret"></span></div>
+						 							 				<ul class="app-wexi">
+						 							 					<li class="wx-box">
+						 							 						<div class="wx-left">
+						 							 							<img src="/jc6/platform/finallogin/images/app.png" alt="" />
+						 						 							</div>
+						 							 						<div class="wx-right">
+						 														<p class="wx-title">手机APP</p>
+						 														<ul class="wx-systom">
+						 															<li><img src="/jc6/platform/finallogin/images/iphone.png" alt="" /></li>
+						 															<li><img src="/jc6/platform/finallogin/images/android.png" alt="" /></li>
+						 														</ul>
+						 							 						</div>
+						 							 					</li>
+						 							 					<li class="wx-box">
+						 							 						<div class="wx-left">
+						 							 							<img src="/jc6/platform/finallogin/images/app.png" alt="" />
+						 						 							</div>
+						 							 						<div class="wx-right">
+						 														<p class="wx-title">关注微信</p>
+						 														<p class="wx-oa">微信办公更方便</p>
+						 							 						</div>
+						 							 					</li>
+						 							 				</ul>
+						 		</div> -->
+					 		</div>
+							<div class="login_cont">
+								<div class="error_wrap" style="position:relative;bottom:30px;width:270px;">
+									<div class="login_error" style="display:none;">
+										<span class='login_error_right' id="login_error" style="font-family:'宋体'"></span>
+									</div>
+								</div>
+								<div class="user_info">
+									<!-- <a class="change_account" id="open" style="position:relative;top:-37px;">[更改用户]</a> -->
+									<div id="user_signal" class="user_signal" style="background:none;position:relative;top:-140px;left:93px;width:80px;height:80px;border-radius:50%;border:3px solid rgba(255,255,255,0.3)">
+										<img src="../finallogin/images/head-user-photo.png" style="border-radius:50%;background-size:cover;width:100%;height:100%;left:0;top:0;">
+									</div>
+									<p class="username" style="display:none;"><span id="current_username"></span></p>
+								</div>
+								<div class="login_right">
+									<table width="100%" border="0" cellspacing="0">
+										<tr height="70px">
+											<td>
+												<div class="table_bg" style="position:relative;left:-66px;top:-10px;">
+													<!-- <div id="mainTable">
+														<div  id="mainUserId" class="formLi">
+															<span class="r_loginBoxFontColor" style="text-align:center;">用户名:</span>
+															<div class="select_ico"></div>
+															<input type="text" name="accounts" id="accounts" value="" readonly />
+														</div>
+														<div id="mainUser" class="formLi">
+															<span class="r_loginBoxFontColor" style="text-align:center;">密码:</span>
+															<input type="password" name="password" id="password" value="" readonly />
+														</div>
+													</div> -->
+													<div id="mainTable" style="margin-top:15px;">
+														<div id="mainUserId" class="formLi">
+															<!-- <span class="r_loginBoxFontColor">Username:</span> -->
+															<!-- <div class="select_ico" onclick="showList();"></div> -->
+															<img src="../finallogin/images/user.png">
+															
+															
+																<input type="text" name="accounts" id="accounts" ondblclick="tabUser()" style="background:none;">
+															
+														</div>
+														<div id="mainUser" class="formLi">
+															<!-- <span class="r_loginBoxFontColor">Password:</span> -->
+															<img src="../finallogin/images/pasword.png">
+															
+															
+																<input type="password" name="password" id="password" onfocus="this.value = ''" style="background:none;">
+															
+														</div>
+														<!-- <div  id="mainUserId" class="formLi">
+															<span class="r_loginBoxFontColor">用户名:</span>
+															<div class="select_ico" onclick="showList();"></div>
+															<img src="/jc6/platform/finallogin/images/user.png"/>
+															
+															
+																<input type="text" name="accounts" id="accounts" placeholder="账号" onclick="showList();" ondblclick="tabUser()"/>
+															
+														</div>
+														<div id="mainUser" class="formLi">
+															<span class="r_loginBoxFontColor">密码:</span>
+															<img src="/jc6/platform/finallogin/images/pasword.png"/>
+																<input type="password" name="password" id="password" placeholder="密码"  onfocus = "this.value = ''"/>
+														
+															
+															<div style="float:right;width:30px;height:20px;background:url('/jc6/upload/loginlayout/btn.png') center 100% 100%;">
+																
+															</div>
+														</div> -->
+														<div class="login_button" onclick="login_servlet();" style="width:20px;height:20px;position:absolute;left:227px;top:61px;">
+																<img src="../../upload/loginlayout/btn.png" style="width:100%;height:100%;">
+														</div>
+														<div id="dynamicPass" style="display:none" class="formLi">
+															<span class="r_loginBoxFontColor">
+																动态密码:
+															</span>
+															<input type="text" name="snNo" id="snNo" onfocus="this.value = ''">
+														</div>
+														<div id="epassCheck" style="display:none" class="formLi">
+															<span class="r_loginBoxFontColor">PIN&nbsp;&nbsp;&nbsp;码:</span>
+															<input type="password" name="pinNo" id="pinNo" onfocus="this.value = ''">
+														</div>
+														<div id="trChPwd" class="trChPwd">
+																<ul id="bottomText">
+																	<li>
+																		<input type="checkbox" id="chkPwd" name="chkPwd" class="chkPwd">
+																		<span class="r_loginBoxFontColor" style="font-family:'宋体';display:inline-block;margin-bottom:10px;vertical-align:middle;">
+																			记住密码
+																		</span>
+																	</li>
+																	<li style="cursor:pointer;">
+																		<span onclick="changePassword();" class="r_loginBoxFontColor" style="font-family:'宋体'">修改密码</span>
+																	</li>
+																	<li style="cursor:pointer;">
+																		<span class="r_loginBoxFontColor code " onclick="login_qrc()">扫描下载APP</span>
+																		<div class="qrcImgWrap" style="width: 260px;height: 130px;background: #ffffff;position:absolute;right:80px;top:140px;display:none">
+																			<div id="qrcImg" class="qrcImg" style="">
+																			</div>
+																			<p style="position:absolute;width:100px;z-index:10;color:#000000;font-size: 12px;left:12px;bottom:0;">
+																				打开APP扫描登录
+																			</p>
+																			<div class="rightimg" style="float: right;margin: 10px;">
+																				<img src="../finallogin/images/1.png" alt="">
+																				<p style="color:#000000;font-size: 12px;text-align:center;">
+																					扫描下载APP
+																				</p>
+																			</div>
+																		</div>
+																		
+																	</li>
+																	<li>
+																		<div class="assist">
+																			<span class="r_loginBoxFontColor language" onclick="showChoiceLanguage();">简体中文<i class="fa fa-chevron-down"></i></span>
+																
+																			<div class="choice_language">
+																				
+																					<span class="r_setColor" lang="zh_CN" onclick="switchLanguage('zh_CN',this);">简体中文</span>
+																				
+																					<span class="r_setColor" lang="zh_TW" onclick="switchLanguage('zh_TW',this);">繁体中文</span>
+																				
+																					<span class="r_setColor" lang="en_US" onclick="switchLanguage('en_US',this);">English</span>
+																				
+																			</div> 
+																		</div>
+																	</li>
+																</ul>	
+																<!-- <span class="r_loginBoxFontColor trChPwd_span" style="font-family:'宋体'">
+																													<input type="checkbox" id="chkPwd" name="chkPwd" class="chkPwd" />记住密码
+																												</span>
+																												<a onclick="changePassword();" class="r_loginBoxFontColor" style="font-family:'宋体'">修改密码</a> -->												
+														</div>	
+													</div>
+												</div>
+											</td>
+										</tr>
+								    </table>
+							    </div>
+							<!-- <div class="qrc" style="position:relative;left:230px;top:-192px;"></div> -->
+							</div>
+							<span id="copyby" class="moveIs" style="display:none;border:1px dashed tomato;position:absolute;z-index:1968;width:190px;">金和软件  2013 Jinher SoftWare</span><!-- 金和软件   &copy 2011 Jinher SoftWare -->
+					</div>			
+				
+				<div class="list_big" id="list_big" style="display:none;">
+			 		<div class="list_big_container"><!--list_big_container  -->
+						<div class="list_body">
+							<ul>
+								<li onclick="addNewUser();">
+									<div class="add_user_photo_bg">
+										<div class="list_add"><img src="../finallogin/images/head-add.png"></div>
+									</div>
+									<div class="list_add_usertip">
+										新用户登录<!-- 新用户登录 -->
+									</div>
+								</li>
+							</ul>
+							<!-- declare -->
+							<ul id="ul_user_list" style="">
+		
+							</ul>
+						</div>
+						<div class="list_close" onclick="hideList();" style="left:317px;top:3px"></div>
+			 		</div><!--list_big_container  -->
+				</div>
+					<!-- 金和软件  2011 Jinher SoftWare -->
+					<span id="copyby" class="copy_right" style="display:none;">金和软件  2013 Jinher SoftWare</span>
+				</div>
+				
+			</form>
+	</body>
+	<script type="text/javascript">
+/**登录**/
+document.form1.accounts.focus();//
+document.onkeydown=function(event){e = event ? event :(window.event ? window.event : null);if(e.keyCode==13){ login_servlet();}}
+function login_servlet(){
+	if(leftAndrightTrim(document.form1.accounts.value)==""){
+		var text = "用户名不能为空!";
+    	$('.login_error').css('display','block').find("#login_error").text(text);
+		document.form1.accounts.focus();
+		return ;
+	}else {
+		if(document.form1.password.value==""){
+			var text = "密码不能为空!";
+			$('.login_error').css({'display':'block','font-family':'宋体'}).find("#login_error").text(text);
+			document.form1.password.focus();
+		return ;
+		}
+	}
+	if($("#currentLoginType").val()=="epassCheck"){
+		var flag = Validate();
+		if(!flag){
+			return false;
+		}
+	}
+	var resultBean = secuValidate();
+	if(!resultBean.result){
+		if(resultBean.errorMsg!=''){
+			$('.login_error').css('display','block').find("#login_error").text(resultBean.errorMsg);
+		}
+		return false;
+	}
+	var locale_lang = "zh_CN";
+	var IyouModuleId = "";
+	var IyouModuleUrl = "";
+	var strjson=jQuery.param({
+		'accounts':leftAndrightTrim(document.form1.accounts.value),
+		'password':jQuery("#password").val(),
+		'snNo':$.trim(jQuery("#snNo").val()),
+		'currentLoginType':$.trim(jQuery("#currentLoginType").val()),
+		'digest':$.trim(jQuery("#digest").val()),
+		'snserial':$.trim(jQuery("#snserial").val()),
+		'random':$.trim(jQuery("#random").val()),
+		'pinNo':$.trim(jQuery("#pinNo").val()),
+		'signNumber':$.trim(jQuery("#signNumber").val()),
+		'cert':$.trim(jQuery("#cert").val()),
+		'randomNumber':$.trim(jQuery("#randomNumber").val()),
+		'isMobile': ('ontouchstart' in window)?"yes":"no",
+		'otherParam':resultBean.otherParam,
+		'platId':getUsePlatId(),
+		'lang': locale_lang
+	});
+	jQuery.ajax({
+		url: "/jc6/platform/sys/login!login.action",
+		type: "POST",
+		data: strjson,
+		success:function(obj) {
+			if(obj.success=='2'){
+				//alert("您的账号已经被锁定，请联系管理员进行解锁!");
+				var text = "您的账号已经被锁定，请联系管理员进行解锁!";
+				$('.login_error').css('display','block').find("#login_error").text(text);
+		    	loginFail();
+		    	return false;
+			}else if(obj.success=='1' && obj.changeFlag=='0' && (obj.ipCheck=='3' || obj.ipCheck=='0')){//login successfully
+				//记住密码，保存cookie
+				saveCookieInfo(obj.username,obj.imageSrc,Date.parse(new Date()));
+// 				sortJson();
+				//如果是mobile直接跳转到portal页面
+				if(('ontouchstart' in window)){
+					var url = "/jc6/platform/sys/login!portal.action?lang="+locale_lang;
+					if ("" != IyouModuleId){
+						url += "&IyouModuleId=" + IyouModuleId;
+					}
+					if ("" != IyouModuleUrl){
+						url += "&IyouModuleUrl=" + IyouModuleUrl;
+					}
+					window.location.href=url;
+				}else{
+					var url = "/jc6/platform/sys/login!portal.action?lang="+locale_lang;
+					if ("" != IyouModuleId){
+						url += "&IyouModuleId=" + IyouModuleId;
+					}
+					if ("" != IyouModuleUrl){
+						url += "&IyouModuleUrl=" + IyouModuleUrl;
+					}
+					window.location.href=url;
+				}
+		    }else if(obj.success=='1' && obj.changeFlag=='1'){
+		    		var url="/jc6/platform/sys/login!modifyPw.action?account="+obj.account;
+		    		var title = "密码更改";
+		    		art.dialog.open(url,{window:"top",title: title,width:"350px",height:"200px",lock:true,closeFn:function(){var cancelFlag=cancelLogin();
+					 	if(cancelFlag==1){
+					 		loginFail();
+					 	}}});
+		    }else if(obj.success=='1'  && obj.ipCheck=='1'){
+		    	//alert("您的Ip已经被系统限制，请重新登录。");
+		    	var text = "您的Ip已经被系统限制，请重新登录。";
+		 	    $('.login_error').css('display','block').find("#login_error").text(text);
+		    	loginFail();
+		    }else if(obj.success=='1'  && obj.ipCheck.length>1){
+		    	var url=encodeURI("/jc6/platform/sys/ip-limit!sendJump.action?itemId="+obj.ipCheck);
+		    	var title = "短信验证";
+				art.dialog.open(url,
+			    {
+					title: title,
+					id: 'ck',
+					window:"top",
+					lock: true,
+					left:"center",
+					top:"center",
+					width:'400px',
+					height:'220px',
+					closeFn:function()
+					{
+				    	$('.login_error').css('display','block').find("#login_error").text(obj.msg);
+		    			loginFail();
+					}
+	  		    });
+		    }else{
+    			flag = 0;
+				if(obj.msg=="授权码已过期"){
+		    		var str='<a href="/jc6/platform/sys/login!uploadListener.action?">上传新授权!</a>';
+		    		$('.login_error').css('display','block').find("#login_error").text(obj.msg).append(str);
+		    	}else{
+		    		$('.login_error').css('display','block').find("#login_error").text(obj.msg);
+		    		if(obj.loginFlag!="0"){
+			    		var count = obj.leaveNum;
+			    		var text = " 剩余登录次数"+count+"次";
+			    		$('.login_error').css('display','block').find("#login_error").append(text);
+		    		}
+		    	}
+		    	loginFail();
+		    }
+		}
+	});
+	
+}
+function leftAndrightTrim(str){ //删除左右两端的空格
+　　     return str.replace(/(^\s*)|(\s*$)/g, "");
+}
+</script>
+<script type="text/javascript">
+/**手机客户端**/
+ 	/*$(".code").mouseenter(function(){
+ 		$(".login_phone").show();
+ 	})
+ 	$(".code").mouseleave(function(){
+ 		$(".login_phone").hide();
+ 	})*/
+	/** 生成二维码图片 解决兼容性**/
+	if(navigator.appName == "Microsoft Internet Explorer"){
+		jQuery('#qrcImg').qrcode({
+			"render":"table",
+			"text":"http://url.iuoooo.com/s/R/S?url=nNmrMYfaaM",
+			"width":"90",
+			"height":"90",
+			"background": "#fff" // 背景色
+		})
+	}/*else{
+		jQuery('#qrcImg').qrcode({
+			"render":"canvas",
+			"text":"http://url.iuoooo.com/s/R/S?url=nNmrMYfaaM",
+			"width":"90",
+			"height":"90",
+			"background": "#fff" // 背景色
+		})
+	}*/
+	
+var isQrc=false,
+	qrcTimer=null,//10秒更新一次二维码
+	qrcImgTimer=null;//2分钟后停止更新二维码，需点击开启定时更新
+function login_qrc(){
+	clearInterval(qrcImgTimer);
+	if(isQrc){
+		isQrc=false;
+		$('.qrc').removeClass('qrcPass');
+		$("#login_error").hide();
+		//$(".login_title").show();
+		clearInterval(qrcTimer);
+		$('.qrcImgWrap').hide();
+		//$('.login_cont').show();
+		$('#qrcImg').html('');
+	}else{
+		isQrc=true;
+		//$('.login_cont').hide();
+		$('.qrcImgWrap').show();
+		$('.qrc').addClass('qrcPass');
+		$("#login_error").hide();
+		//$(".login_title").hide();
+		stopQrcImg();
+		getQrcImg();
+		$('.qrcImgWrap p').css('visibility','visible');
+	}
+}
+function stopQrcImg(){
+	qrcImgTimer=setInterval(function(){
+		clearInterval(qrcTimer);
+		clearInterval(qrcImgTimer);
+		if($('#qrcImg .mark').size()==0){
+			var _mark='<div class="mark"><label>二维码失效，点击刷新</label></div>';
+			$('#qrcImg').append(_mark);	
+			$('#qrcImg .mark').bind('click',function(){
+				getQrcImg();
+				$('#qrcImg .mark').hide();
+				$('.qrcImgWrap p').css('visibility','visible');
+				stopQrcImg();
+			})
+		}else{
+			$('#qrcImg .mark').show();
+		}
+		$('.qrcImgWrap p').css('visibility','hidden');
+		//console.log('停止更新');
+	},120000)
+}
+function getQrcImg(){
+	var uuid;
+	$.ajax({
+		url: "/jc6/platform/qrcode/quick-response-barcode!getQRCode.action",
+		type: "POST",
+		async: false,
+		success: function(data){
+			if(data.uuid!=''){
+				uuid=data.uuid;
+				var img=new Image();
+				img.src='data:image/jpg;base64,'+data.base64Img;
+				$('#qrcImg img').remove();
+				$('#qrcImg').append(img);
+				qrcTimer=setInterval(function(){
+					$.ajax({
+					url: "/jc6/platform/sys/login!scanLogin.action",
+					data:jQuery.param({'uuid':uuid}),
+					type: "POST",
+					async: false,
+					success: function(obj){
+						//wanghp 增加两种登录情况。
+							if(obj.success=='1'){//login successfully
+								clearInterval(qrcTimer);
+								if(('ontouchstart' in window)){
+									window.location.href='/jc6/platform/sys/login!portal.action';
+								}else{
+									window.location.href="/jc6/platform/sys/login!portal.action";
+								}
+						    } else if(obj.success=='1'  && obj.ipCheck=='1') {
+						    	var text = "您的Ip已经被系统限制，请重新登录。";
+						 	    $('.login_error').css('display','block').find("#login_error").text(text);
+						    	loginFail();
+						    } else if(obj.success=='1'  && obj.ipCheck.length>1) {
+						    	var url=encodeURI("/jc6/platform/sys/ip-limit!sendJump.action?itemId="+obj.ipCheck);
+						    	var title = "短信验证";
+								art.dialog.open(url, {
+									title: title,
+									id: 'ck',
+									window:"top",
+									lock: true,
+									left:"center",
+									top:"center",
+									width:'400px',
+									height:'220px',
+									closeFn:function() {
+								    	$('.login_error').css('display','block').find("#login_error").text(obj.msg);
+						    			loginFail();
+									}
+					  		    });
+						    } else {
+				    			flag = 0;
+						    	//alert("用户名或密码错误!");
+						    	//$("#login_error").text(obj.msg);
+								if(obj.msg=="授权码已过期"){
+						    		var str='<a href="/jc6/platform/sys/login!uploadListener.action?">上传新授权!</a>';
+						    		$('.login_error').css('display','block').find("#login_error").text(obj.msg).append(str);
+						    	} else {
+						    		$('.login_error').css('display','block').find("#login_error").text(obj.msg);
+						    	}
+						    	loginFail();
+    						}
+						
+						},
+						error:function(e){
+						}
+					});
+					//console.log('更新');
+				},3000)
+			}
+		},
+		error:function(e){
+			
+		}
+	});
+}
+function cancelLogin(){
+	cancelFlag=0;
+	$.ajax({
+		url: "/jc6/platform/sys/login!cancelLogin.action",
+		type: "POST",
+		async: false,
+		success: function(data){
+			cancelFlag=1;
+		}
+	});
+	return cancelFlag;
+}
+function loginFail(){
+    	$("#password").val("");
+    	$("#password").focus();
+    	jQuery(".login_body").show(); //liling 2011-11-22
+}
+//隐藏2个header部分的弹出DIV
+jQuery(function(){
+	$(".login_list").hover(//下拉列表鼠标移出效果控制
+            function(){$(this).css('display', 'block');},
+            function(){$(this).css('display', 'none');}
+	);
+	fillUserInfoBlank();//填充登录窗口信息
+	getHistoryList();//用户登录历史记录下拉列表
+	jQuery(".login_method").css("display","none");
+	jQuery(".login_list").hide();
+	jQuery(".list_big").hide();//弹出用户列表选择窗口
+  	var li = $(".login_list li").first();
+  	if(li.get(0) != undefined){
+  		 li.click();
+  	}
+//     sortJson();
+    //设定语言值
+    setLanguageText();
+    
+});
+	
+
+//点击弹出相应的DIV层
+function showLoginMethod(){
+	$(".login_method").slideToggle("fast");
+}
+function showChoiceLanguage(){
+	$(".choice_language").slideToggle();
+	//console.log($(".choice_language").length)
+}
+//更换登录方式DIV选择单击事件
+function getPwd(){
+	var text = "密码登录";
+	$(".change_login").html(text);
+}
+function getEpass(){
+	var text = "Epass登录";
+	$(".change_login").html(text);
+}
+
+//弹出下拉用户ID
+function showList(){
+	$(".login_list").slideToggle("fast");
+}
+function hideList(){
+	//jQuery(".list_big").css("display","none");
+	jQuery(".list_big").fadeOut(300);
+	$(".list_big_bg").remove();
+	return false;
+}
+
+/**绑定点击[更改用户]触发事件**begin****************/
+jQuery("#user_signal").click(function(){
+	buildHisoryUserList();
+	jQuery(".list_big").css("display","block").css("z-index",11111);
+	var windowHeight = $(window).height(),windowWidth = $(window).width();
+		$("<div style='width:"+windowWidth+";height:"+windowHeight+"px;position:relative;z-index:-5;left:0px;top:0px;'></div>")
+		.addClass("list_big_bg").appendTo($("body"));
+	return false;
+});
+jQuery("body").click(function(){
+	var text = "更改用户";
+	$("#open").text("["+ text +"]").show();
+	$(".list_big_bg").hide();
+	
+})
+jQuery(".code").click(function(){
+	$(".login_error").hide();
+})
+
+/**绑定点击[更改用户]触发事件****end**************/
+
+
+//主要是解决如果密码的长度是小于8位的时候多显示****
+function fixPassword(password,flag){
+	/*
+	var addStr = " "
+	if(password.length < 8 && flag){
+		for(var i = 0 , j = 8 - password.length ; i < j ; i++){
+			password += addStr;
+		}
+	}*/
+	return password;
+}
+
+/*双击事件*/
+function tabUser(){
+	jQuery('#user_signal').click();
+}
+</script> 
+<script type="text/javascript">
+var frm = document.forms[0];
+	//产生随机数
+function randomPassword(){
+	var seed = new Array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','P','Q','R','S','T','U','V','W','X','Y','Z', 
+	    'a','b','c','d','e','f','g','h','i','j','k','m','n ','p','Q','r','s','t','u','v','w','x','y','z',
+	    '2','3','4','5','6','7','8','9');//数组 
+    seedlength = seed.length;//数组长度 
+    var createPassword = ''; 
+    //得到长度为十的随机数
+    for (i=0;i<10;i++) {
+     j = Math.floor(Math.random()*seedlength); 
+     createPassword += ''+seed[j];
+    } 
+    return createPassword; 
+}
+//把随机数赋给表单控件，传入后台操作
+frm.random.value = randomPassword();
+function Validate(){
+	//得到输入框值
+	var key = frm.pinNo;
+	if(key.value.length<1){
+		var text = "用户私钥不能！请确定后重新输入";
+		alert(text);
+		key.focus();
+		return false;
+	}
+	try{
+		//检查是否安装ePass 1000的安全驱动
+		ePass.GetLibVersion();
+	}catch(err){
+		//alert("请安装ePass 1000的安全驱动！");
+		var text = "请安装ePass 1000的安全驱动!";
+		alert(text);
+		return false;
+	}
+	try{
+		//检查是否插入ePass 1000
+		ePass.OpenDevice(1,"");
+	}catch(err){
+		//alert("请插入ePass 1000！");
+		var text = "请插入ePass 1000!";
+		alert(text);
+		return false;
+	}
+	
+	try{
+		//验证密钥是否正确
+		ePass.VerifyPIN(0,key.value);
+	}catch(err){
+		//alert("用户私钥输入错误，请核实后重新输入！");
+		var text = "???sys.ePassKeyError=???";
+		alert(text);
+		ePass.CloseDevice();
+		return false;
+	}
+	try{
+		//检查目录是否正确 &H300(十六进制)=768
+		ePass.ChangeDir(768, 0, "JH_JCS");
+	}catch(err){
+		//alert("请改变Demo目录！");
+		var text = "请改变Demo目录!";
+		alert(text);
+		ePass.CloseDevice();
+		return false;
+	}
+	try{
+		//打开密钥
+		ePass.OpenFile(0, 1);
+	}catch(err){
+		var text = "密钥文件读取失败!";
+		alert(text);
+		ePass.CloseDevice();
+		return false;
+	}
+	try{
+		//验证
+		var d = ePass.HashToken (1,2,frm.random.value);
+		//得到U盾唯一标识
+		var results=ePass.GetStrProperty(7, 0, 0);
+		frm.digest.value=d;
+		frm.snserial.value=results;
+		//关闭IO
+		ePass.CloseDevice();
+		//提交
+		return true;
+	}catch(err){
+		//alert("随机数获取失败！");
+		var text = "随机数获取失败!";
+		alert(text);
+		ePass.CloseDevice();
+		return false;
+	}
+}
+  
+function validateCA(){
+	try{
+		var num = randomPassword();
+		frm.randomNumber.value = num;
+		demo.device="NiKey100";
+		demo.container="indentity";
+		var sign=demo.sign(num);
+		if(sign==""){
+			var errCode = "错误码";
+			var errMes = "错误信息";
+			sign= errCode + ":0x"+demo.errCode.toString(16)+"\n"+errMes+":"+demo.errMsg;
+			return false;
+		}	
+		frm.signNumber.value = sign;
+		frm.cert.value = demo.cert;
+		return true;
+	}catch(err){
+		//alert("请确认您的CA UKEY已经插入，并填入了正确了pin码");
+		var info = "请确认您的CA UKEY已经插入,并填入了正确了pin码";
+		alert(info);
+		return false;
+	}
+}
+		
+function changePassword(){
+	var account = $("#accounts").val();
+	var title = "修改密码";
+	var selectLang = "zh_CN";
+	art.dialog.open("/jc6/platform/sys/login!changePassWord.action?account="+account+"&lang="+selectLang,{
+		title: title,
+		window:"top",
+		width:"350px",
+		height:"250px",
+		lock:true
+	});
+}
+
+/**设定语言SPAN元素中的值***/
+function setLanguageText(lang){
+	var selectLang="zh_CN";
+	var span=$("span[lang='"+lang+"']");
+	//$(".language").text("繁体中文");
+	var langName = "简体中文";
+	$('.language')[0].firstChild.nodeValue = langName;
+}
+window.onload = function(){
+	var bgImg = document.getElementsByClassName("login_main")[0].style.backgroundImage;
+	var colorVal = bgImg.split("/")[4] || "";
+	var color = colorVal.split(".")[0] || "";
+	if(color){
+		if(color == "green"|| color == "blue1"){
+			$(".list_big_container").css({"left":"64%","top":"50%"});
+		}else if((color == "red" || color == "blue")){
+			$(".list_big_container").css({"left":"43%","top":"47%"});
+		}
+		$(".login_mian").hide();
+	}else{
+		$(".login_mian").show();
+		$(".list_big_container").css({"left":"51%","top":"55%"});
+	}
+	
+}
+$(function(){
+	var isIE = (navigator.userAgent.indexOf('MSIE')>=0) || (navigator.userAgent.indexOf('Trident')>=0);
+	if(isIE){
+		$("#chkPwd").css("margin-top","3px");
+	}
+})
+</script>
+</html>

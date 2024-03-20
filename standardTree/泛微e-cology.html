@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+  <meta content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" name="viewport"/>
+  <link href="/cloudstore/resource/pc/com/v1/index.min.css?v=1693382369582" rel="stylesheet"/>
+  <link href="/cloudstore/resource/pc/com/v1/ecCom.min.css?v=1693382369582" rel="stylesheet"/>
+  <script src="/cloudstore/resource/pc/jquery/jquery.min.js?v=20200605" type="text/javascript">
+  </script>
+  <script type="text/javascript">
+   var faviconUrl=(window.ecologyContentPath||"")+"/favicon.ico";document.writeln('<link rel="icon" href="'+faviconUrl+'" mce_href="'+faviconUrl+'" type="image/x-icon">'),document.writeln('<link rel="shortcut icon" href="'+faviconUrl+'" mce_href="'+faviconUrl+'" type="image/x-icon">')
+  </script>
+  <script>
+   localStorage.setItem("staticVersion",1693382373141)
+  </script>
+ </head>
+ <body>
+  <div id="container">
+  </div>
+  <script src="/cloudstore/resource/pc/polyfill/polyfill.min.js" type="text/javascript">
+  </script>
+  <!-- Polyfills -->
+  <!--[if lt IE 10]>
+    <script type="text/javascript" src="/cloudstore/resource/pc/shim/shim.min.js"></script>
+    <![endif]-->
+  <script type="text/javascript">
+   var agent=window.navigator.userAgent;if(-1<agent.indexOf("Windows")&&-1<agent.indexOf("Safari")&&agent.indexOf("Chrome")<0)window.location.href="/wui/common/page/sysRemind.jsp?labelid=7";else if((-1<agent.indexOf("Chrome")||-1<agent.indexOf("CriOS"))&&-1<agent.indexOf("Safari")){var regStr_chrome=/chrome\/[\d.]+/gi,chrome_info=agent.match(regStr_chrome),chrome_version=chrome_info[0].replace("Chrome/","").split(".")[0];chrome_version<49&&$.ajax({url:"/api/system/info/interceptionChrome",type:"GET",success:function(e){"true"===JSON.parse(e).isInterceptChorme&&(window.location.href="/wui/common/page/sysRemind.jsp?labelid=6")}})}else{var isIE=-1<agent.indexOf("MSIE")||-1<agent.indexOf("Trident"),IEVersion=0;agent.replace(/MSIE ([\d.]+)/g,function(e){var n=parseInt(e.replace(/^.*MSIE ([\d.]+).*$/,"$1"),10);return IEVersion<n&&(IEVersion=n),e}),isIE&&0<IEVersion&&IEVersion<9&&(window.location.href="/wui/common/page/sysRemind.jsp?labelid=4")}
+  </script>
+  <script src="/cloudstore/resource/pc/react16/react.production.min.js?v=1607482078878" type="text/javascript">
+  </script>
+  <script src="/cloudstore/resource/pc/react16/react-dom.production.min.js?v=1607482078878" type="text/javascript">
+  </script>
+  <script src="/cloudstore/resource/pc/react16/prop-types.min.js" type="text/javascript">
+  </script>
+  <script src="/cloudstore/resource/pc/react16/create-react-class.min.js" type="text/javascript">
+  </script>
+  <script>
+   React.PropTypes=PropTypes,React.createClass=createReactClass
+  </script>
+  <!-- 全局依赖 -->
+  <script src="/cloudstore/resource/pc/promise/promise.min.js" type="text/javascript">
+  </script>
+  <script src="/cloudstore/resource/pc/fetch/fetch.min.js" type="text/javascript">
+  </script>
+  <!-- 组件库 -->
+  <script src="/spa/moduleConfig.js?v=1693382369582" type="text/javascript">
+  </script>
+  <script src="/spa/coms/ssoConfig/config.js?v=1693382369582" type="text/javascript">
+  </script>
+  <script src="/cloudstore/resource/pc/com/v1/index.min.js?v=1693382369582" type="text/javascript">
+  </script>
+  <script src="/cloudstore/resource/pc/com/v1/ecCom.min.js?v=1693382369582" type="text/javascript">
+  </script>
+  <!-- mobx -->
+  <script src="/cloudstore/resource/pc/mobx-3.1.16/mobx.umd.js" type="text/javascript">
+  </script>
+  <script src="/cloudstore/resource/pc/mobx-react-4.2.1/index.js?v=1593485931122" type="text/javascript">
+  </script>
+  <script src="/cloudstore/resource/pc/react-router/ReactRouter.min.js?v=1593485931122" type="text/javascript">
+  </script>
+  <script src="/spa/coms/index.mobx.js?v=1693382369582" type="text/javascript">
+  </script>
+  <!-- zDialog -->
+  <script src="/js/ecology8/lang/weaver_lang_7_wev8.js" type="text/javascript">
+  </script>
+  <script src="/wui/theme/ecology8/jquery/js/zDialog_wev8.js" type="text/javascript">
+  </script>
+  <!-- 门户公共 -->
+  <link href="/spa/portal/public/index.css?v=1685480433504" rel="stylesheet"/>
+  <script src="/spa/portal/public/index.js?v=1685480433504" type="text/javascript">
+  </script>
+  <!-- 登录接口 -->
+  <script src="/spa/hrm/staticLoginNew/loginNew.js?v=1685480858767" type="text/javascript">
+  </script>
+  <!-- 门户页面 -->
+  <style id="portal-style">
+  </style>
+  <link href="/spa/portal/static/index.css?v=1685480721740" rel="stylesheet"/>
+  <script src="/spa/portal/static/index.js?v=1685480721740" type="text/javascript">
+  </script>
+  <!-- 主题 -->
+  <style id="e9theme-style">
+  </style>
+  <link href="/spa/theme/static/index.css?v=1685480845785" rel="stylesheet"/>
+  <script src="/spa/theme/static/index.js?v=1685480845785" type="text/javascript">
+  </script>
+  <!-- 收藏 -->
+  <link href="/spa/favourite/static/index.css?v=1685481411304" rel="stylesheet"/>
+  <!--多时区相关的js-->
+  <script src="/js/timeZone/timeZone.js" type="text/javascript">
+  </script>
+  <!--rsa加密-->
+  <script src="/js/rsa/jsencrypt.js" type="text/javascript">
+  </script>
+  <script src="/js/rsa/rsa.js" type="text/javascript">
+  </script>
+  <script src="/formmode/js/CryptoJS3.1.2/aes_wev8.js" type="text/javascript">
+  </script>
+  <script src="/formmode/js/CryptoJS3.1.2/mode_ecb_wev8.js" type="text/javascript">
+  </script>
+  <script src="/js/weaver_encrypt/weaver_encrypt.js" type="text/javascript">
+  </script>
+  <!-- <script type="text/javascript" src="/js/jquery/jquery_wev8.js"></script> -->
+  <script src="/spa/main/index-mobx.js?v=30423bfc" type="text/javascript">
+  </script>
+  <script src="/plugin/login/login.js" type="text/javascript">
+  </script>
+ </body>
+</html>

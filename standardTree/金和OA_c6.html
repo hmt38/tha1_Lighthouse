@@ -1,0 +1,217 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=8,chrome=1" />
+    <title>
+        禧天龙协同管理平台
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0,maximum-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="apple-touch-icon" href="../images/icon.png" />
+    <link rel="shortcut icon" href="../image/favicon.ico" />
+    <link href="../JHsoft.UI.Lib/skin/default/skin.css" type="text/css" rel="stylesheet" />
+    <link href="css/PasswordCommon.css" type="text/css" rel="stylesheet" />
+    <link href="../JHSoft.Web.AddMenu/LoginTemplate/css/LoginButton.css" type="text/css"
+        rel="stylesheet" />
+    <link href="../JHSoft.Web.AddMenu/LoginTemplate/css/LoginLayout.css" type="text/css"
+        rel="stylesheet" />
+    <style type="text/css">
+        #divBg
+        {
+            display: none;
+        }
+        #imgBg
+        {
+            position: absolute;
+        }
+        #divLoginRegion
+        {
+            position: absolute;
+            z-index: 1000;
+        }
+        #divSetRegion
+        {
+            position: absolute;
+            z-index: 1000;
+            text-align: center;
+            width: 400px;
+        }
+        #divSetRegion a
+        {
+            cursor: pointer;
+            height: 20px;
+            text-align: right;
+            text-decoration: none;
+        }
+        #divSetRegion a:hover
+        {
+            text-decoration: underline;
+        }
+        #divCopyRightRegion
+        {
+            position: absolute;
+            z-index: 1000;
+            width: 240px;
+            text-align: center;
+        }
+        #imgValidateCode
+        {
+            vertical-align: bottom;
+        }
+        #btnRefreshVC
+        {
+            cursor: pointer;
+            vertical-align: bottom;
+            border: 0px;
+        }
+        #divCopyRightRegion a
+        {
+            text-decoration: underline;
+        }
+    </style>
+
+    <script type="text/javascript" src="../js/common.js"></script>
+
+    <script type="text/javascript" src="js/PasswordCommon.js"></script>
+
+    <script type="text/javascript" src="js/PasswordNew.js"></script>
+
+    <script type="text/javascript">
+        var uNameIsRequired = "请输入用户名和密码。";
+        var pwdIsRequired = "请输入用户名和密码。";
+        var wrongValid = "验证码错误";
+        var needCookie = "系统需要使用cookie，请打开浏览器的cookie选项。";
+    </script>
+
+</head>
+<body>
+    <!--[if lt IE 7]> <div style=' clear: both; height: 59px; padding:0 0 0 15px; position:  relative;'> <a href="http://windows.microsoft.com/zh-CN/internet-explorer/downloads/ie-8"><img  src="http://theie6countdown.cn/img/banner/warning_bar_0027_Simplified%20Chinese.jpg" border="0"  height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing  experience, upgrade for free today." /></a></div> <![endif]-->
+    <form method="post" action="./PassWordNew.aspx" id="Form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMTIxMTIyMDg5NQ9kFgJmD2QWAgIYDxYCHgdWaXNpYmxlaGQYAQUeX19Db250cm9sc1JlcXVpcmVQb3N0QmFja0tleV9fFgEFBmNoa1B3ZER6p8rng4AgeQJnea2zgv1AMREAT2QmbuvZ1HcN/16H" />
+</div>
+
+<script type="text/javascript">
+<!--
+var theForm = document.forms['Form1'];
+if (!theForm) {
+    theForm = document.Form1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+// -->
+</script>
+
+
+<script src="/C6/WebResource.axd?d=pNrussoXHNmYAZ6w1t0MCGoYlVn0WSil-vCT62YiBPrGElQKmR2uvoN1Bj7f6W-VRatgjjPSzTpvxd0QomdvXAOnQ4b09Up6B7cK0a_uZh41&amp;t=638259692865233147" type="text/javascript"></script>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="1A84A629" />
+</div>
+    <input type="hidden" name="hidIsValid" id="hidIsValid" value="1" />
+    <input type="hidden" name="hidIsWithToolbar" id="hidIsWithToolbar" value="0" />
+    <input type="hidden" name="hidLoginType" id="hidLoginType" value="new" />
+    <input type="hidden" name="hidLanguage" id="hidLanguage" />
+    <input name="txtLoginType" type="text" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;txtLoginType\&#39;,\&#39;\&#39;)&#39;, 0)" onkeypress="if (WebForm_TextBoxKeyHandler(event) == false) return false;" language="javascript" id="txtLoginType" style="display: none" />
+    <input type="submit" name="txtLanguage" value="" id="txtLanguage" style="display: none" />
+    <input type="hidden" name="hidLanForBtn" id="hidLanForBtn" />
+    <input type="hidden" name="hidBgImageName" id="hidBgImageName" value="SystemCurrent636633120668438944.png" />
+    <input type="hidden" name="hidBgImageWidth" id="hidBgImageWidth" value="1002" />
+    <input type="hidden" name="hidBgImageHeight" id="hidBgImageHeight" value="600" />
+    <input type="hidden" name="hidLoginRegionLayout" id="hidLoginRegionLayout" value="1" />
+    <input type="hidden" name="hidBgColor" id="hidBgColor" value="#3085e7" />
+    <input type="hidden" name="hidButtonStyle" id="hidButtonStyle" value="btn_8" />
+    <input type="hidden" name="hidLoginRegionTextColor" id="hidLoginRegionTextColor" value="#ffffff" />
+    <input type="hidden" name="hidSetRegionTextColor" id="hidSetRegionTextColor" value="#ffffff" />
+    <input type="hidden" name="hidCopyRightRegionTextColor" id="hidCopyRightRegionTextColor" value="#ffffff" />
+    <input type="hidden" name="hidLoginRegionLeft" id="hidLoginRegionLeft" value="587" />
+    <input type="hidden" name="hidLoginRegionTop" id="hidLoginRegionTop" value="252" />
+    <input type="hidden" name="hidSetRegionLeft" id="hidSetRegionLeft" value="517" />
+    <input type="hidden" name="hidSetRegionTop" id="hidSetRegionTop" value="177" />
+    <input type="hidden" name="hidCopyRightRegionLeft" id="hidCopyRightRegionLeft" value="387" />
+    <input type="hidden" name="hidCopyRightRegionTop" id="hidCopyRightRegionTop" value="559" />
+    <div id="divBg">
+        <img alt="" id="imgBg" />
+        <!-- 输入区 -->
+        <div id="divLoginRegion">
+            <div>
+                <label>
+                    用户名</label><input id="txtLoginCode" type="text" class="normal blur" />
+            </div>
+            <div>
+                <label>
+                    密&nbsp;&nbsp;&nbsp;码</label><input id="txtPwd" type="password" autocomplete="off" class="normal blur" />
+            </div>
+            <div id="tdValid">
+                <label>
+                    验证码</label><input name="txtValidate" type="text" id="txtValidate" class="short blur" />
+                <img id="imgValidateCode" src="GetValidCode.aspx?ValidateImg=0" alt="" />
+                <img id="btnRefreshVC" alt="点击刷新验证码" src="../JHSoft.Web.AddMenu/LoginTemplate/img/Refresh.png" />
+            </div>
+            <div>
+                <label class="blank">
+                    &nbsp;</label><input name="chkPwd" type="checkbox" id="chkPwd" />
+                <span>
+                    记录密码</span> <a id="btnModifyPwd" href="javascript:void(0)" class="pwch">
+                        修改密码</a>
+            </div>
+            <div class="divLogin">
+                <input id="btnLogin" type="button" value="登录" class="btnLogin" />
+            </div>
+        </div>
+        <!-- 设置区 -->
+        <div id="divSetRegion">
+            
+            <!--2016-4-22  去掉手机登录-->
+            <!--<label>
+                <a href="javascript:void(0)" id="btnToMobile">
+                    手机版</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            </label>-->
+            <label>
+                <a href="javascript:void(0)" id="btnLoginType">
+                    登录类型</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            </label>
+            <label>
+                <a href="javascript:void(0)" id="btnSelLan">
+                    选择语言</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            </label>
+            <label>
+                <a href="javascript:void(0)" id="btnEnvironment">
+                    环境设置
+                </a>
+            </label>
+        </div>
+        <!-- 版权区 -->
+        <div id="divCopyRightRegion">
+            <span>
+                金和网络&nbsp;&copy;2024&nbsp;<a href="javascript:void(0);"
+                    id="btnCopyRight">Jinher Network</a></span>
+        </div>
+    </div>
+    <!-- 登录方式列表 -->
+    <ul id="ulLoginType" class="llList">
+        <li><a href="javascript:void(0);" name="epass">
+            Epass登录</a></li>
+    </ul>
+    <!-- 语言类型列表 -->
+    <ul id="ulLanguage" class="llList">
+        <li><a href="javascript:void(0);" name="zh-cn">中文简体</a></li>
+        <li><a href="javascript:void(0);" name="zh-tw">中文繁體</a></li>
+        <li><a href="javascript:void(0);" name="en-us">English</a></li>
+    </ul>
+    </form>
+</body>
+</html>

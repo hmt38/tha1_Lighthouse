@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>M3 Server V2.0</title>
+  <link rel="icon" href="img/logo.png" type="image/x-icon"/>
+  <style type="text/css">
+    *{margin: 0;padding: 0;font-family: "Microsoft YaHei",SimSun,Arial,Helvetica,sans-serif; letter-spacing: 0;}
+    .about-plan {
+      /*position: relative;*/
+      /*border: 1px solid #CCCCCC;*/
+      /*height: 280px;*/
+      /*width: 500px;*/
+      /*margin-left: -250px;*/
+      /*padding: 0px;*/
+      /*left: 50%;*/
+      /*top: 50%;*/
+      margin-top: 10px;
+      margin-left: 10px;
+    }
+    ul li {
+      list-style: none;
+      color: #666666;
+    }
+    img {
+      width: 118px;
+      height: 83px;
+    }
+    .title {
+      position: relative;
+      top: 0px;
+    }
+    .top-title-tab {
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+    .span-title {
+      font-size: 55px;
+      font-weight: 800;
+      margin-left: 30px;
+      color: cornflowerblue !important;
+      font-style: italic;
+    }
+    .span-data {
+      font-weight: 800;
+      color: cornflowerblue;
+    }
+    .span-log {
+      font-size: 14px;
+      color: cornflowerblue;
+    }
+    hr {
+      height:2px;border:none;border-top:2px dotted #185598;
+    }
+    .li-msg{
+      height: 50px;
+      line-height: 50px;
+    }
+    .li-partition{
+      height: 20px;
+      line-height: 20px;
+    }
+    .icon-msg-color{
+      color: #FF6347;
+    }
+    .span-msg {
+      font-style: normal;
+      font-weight: 800;
+      font-size: 18px;
+      color: #FF6347;
+    }
+    .li-copyright{
+      font-size: 14px;
+      font-style: oblique;
+    }
+    .span-item-lbl{
+      display: inline-block;
+      width: 205px;
+    }
+  </style>
+  <link rel="stylesheet" href="font/iconfont.css"/>
+</head>
+<body>
+<div class="about-plan">
+  <ul>
+    <li>
+      <table class="top-title-tab">
+        <tr>
+          <td valign="top"><img src="img/logo.png"></td>
+          <td valign="top">
+            <span class="span-title"><u>M3 Proxy Server</u></span>
+          </td>
+        </tr>
+      </table>
+    </li>
+    <li class="li-partition">
+      <hr>
+    </li>
+    <li class="li-msg">
+      <span class="iconfont icon-messagemanage icon-msg-color" id="msg-icon"></span>&nbsp;&nbsp;<span class="span-msg" id="msg-txt">M3-Server 已启动，您可以使用移动设备登录M3</span>
+      <span class="span-msg" id="loadMsg"> >>> 正在获取服务器数据，请稍后...</span>
+    </li>
+    <li>
+      <span class="span-item-lbl">当前服务器版本</span>：<span class="span-data" id="m3ServerVersion"></span>
+    </li>
+    <li>
+      <span class="span-item-lbl">支持V5-A8(A6)服务器版本</span>：<span class="span-data" id="suportV5Version"></span>
+    </li>
+    <li>
+      <span class="span-item-lbl">支持M3移动客户端最低版本</span>：<span class="span-data" id="suportClient"></span>
+    </li>
+    <!--<li>-->
+      <!--<span class="span-item-lbl">当前服务器模式</span>：<span class="span-data" id="serverMode"></span>-->
+    <!--</li>-->
+    <!--<li>-->
+      <!--<span class="span-item-lbl">当前服务器状态</span>：<span class="span-data" id="serverStatus"></span>-->
+    <!--</li>-->
+    <!--<li>-->
+      <!--<span class="span-item-lbl">上次服务器启动时间</span>：<span class="span-data" id="startupTime"></span>-->
+    <!--</li>-->
+    <!--<li>-->
+      <!--<span class="span-item-lbl">服务器已运行时间</span>：<span class="span-data" id="serverRunTime"></span>-->
+    <!--</li>-->
+
+    <!--<li>-->
+      <!--<span class="span-item-lbl">V5-A8(A6)服务器连接状态</span>：<span class="span-data" id="oaServerStatus">正在检查连接状态，请稍后...</span>-->
+    <!--</li>-->
+    <!--<li>-->
+      <!--<span class="span-item-lbl">M3应用包数据检测</span>：当前已缓存[<span class="span-data" id="cacheAppCount"></span>]个应用包-->
+    <!--</li>-->
+    <!--<li>-->
+      <!--<span class="span-item-lbl">最后一次更新应用包时间</span>：<span class="span-data" id="cacheDate"></span>&nbsp;(只取最新更新的应用包时间)-->
+    <!--</li>-->
+    <!--<li class="li-partition">-->
+    <!--</li>-->
+    <!--<li>-->
+      <!--<span class="span-item-lbl">CPU</span>：<span class="span-data" id="cpu"></span>%-->
+    <!--</li>-->
+    <!--<li>-->
+      <!--<span class="span-item-lbl">内存</span>：总大小：<span class="span-data" id="maxMemory"></span>MB|已使用：<span class="span-data" id="useMemory"></span>|剩余：<span class="span-data" id="freeMemory"></span>MB-->
+    <!--</li>-->
+    <!--<li>-->
+      <!--<span class="span-item-lbl">物理内存</span>：总大小：<span class="span-data" id="totalMemorySize"></span>MB|已使用：<span class="span-data" id="usePhysicalMemory"></span>|剩余：<span class="span-data" id="freePhysicalMemorySize"></span>MB-->
+    <!--</li>-->
+    <!--<li class="li-msg">
+      获取日志：<span class="span-log">Start logs</span>&nbsp;|&nbsp;<span class="span-log">Pns Log</span>&nbsp;|&nbsp;<span class="span-log">Localhost Logs</span>
+      &nbsp;|&nbsp;<span class="span-log">catalina Logs</span>
+    </li>-->
+    <li class="li-copyright">
+      Copyright © 2017 北京致远互联软件股份有限公司. 版权所有
+    </li>
+    <br/>
+  </ul>
+</div>
+</body>
+<script type="text/javascript" src="js/jquery-2.1.0.js">
+
+</script>
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+        $.ajax({
+            url:"/mobile_portal/api/m3/core/server/service",
+            type:"get",
+            dataType:"json",
+            contentType:"application/json; charset=utf-8",
+            async: true,
+            success: function(result) {
+                if (result) {
+                    $("#m3ServerVersion").html(result.data.m3ServerVersion);
+                    $("#suportV5Version").html(result.data.suportV5Version);
+                    $("#suportClient").html(result.data.suportClient);
+                    // $("#oaUrl").html(result.data.oaUrl);
+                    // $("#cpu").html(result.data.cpu);
+                    // $("#maxMemory").html(result.data.maxMemory);
+                    // $("#freeMemory").html(result.data.freeMemory);
+                    // $("#serverMode").html(result.data.serverMode);
+                    // $("#serverStatus").html((result.data.serverStatus == "true") ? "正常" : "异常");
+                    // $("#startupTime").html(result.data.startupTime);
+                    // $("#freePhysicalMemorySize").html(result.data.freePhysicalMemorySize);
+                    // $("#totalMemorySize").html(result.data.totalMemorySize);
+                    // $("#useMemory").html(parseInt(result.data.maxMemory) - parseInt(result.data.freeMemory));
+                    // $("#usePhysicalMemory").html(parseInt(result.data.totalMemorySize) - parseInt(result.data.freePhysicalMemorySize));
+                    // // $("#useMemory").html(result.data.totalMemorySize);
+                    // // $("#suportClient").html(result.data.suportClient);
+                    // // $("#appCacheDir").html(result.data.appCacheDir);
+                    // $("#cacheAppCount").html(result.data.cacheAppCount);
+                    // $("#cacheDate").html(result.data.cacheDate);
+                    //
+                    // window.setInterval(getDateDiff, 1000);
+                    //
+                    // window.setInterval(checkOaServerStatus, 30000);
+                }
+                $("#loadMsg").hide();
+            }
+        });
+
+        // function checkOaServerStatus () {
+        //     $.ajax({
+        //         url:"/mobile_portal/api/m3/core/server/checkOaServerStatus",
+        //         type:"get",
+        //         dataType:"json",
+        //         contentType:"application/json; charset=utf-8",
+        //         async: true,
+        //         success: function(result) {
+        //             if (result) {
+        //                 $("#oaServerStatus").html(result.data);
+        //             }
+        //         }
+        //     });
+        // }
+        //
+        // function getDateDiff() {
+        //     var startTime = $("#startupTime").html();
+        //     startTime = startTime.replace(/\-/g, "/");
+        //     var sTime =new Date(startTime).valueOf();
+        //
+        //     var diffTime = new Date(new Date().valueOf() - sTime);
+        //
+        //
+        //     $("#serverRunTime").html(diffTime.getFullYear() - 1970 + '年'
+        //         + (diffTime.getMonth()) + '月'
+        //         + (diffTime.getDate()-1) + '天&nbsp&nbsp'
+        //         + (diffTime.getHours()-8) + '小时'
+        //         + diffTime.getMinutes() + '分钟'
+        //         + diffTime.getSeconds() + '秒');
+        // }
+
+    });
+</script>
+</html>

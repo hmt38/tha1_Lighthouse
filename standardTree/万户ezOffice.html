@@ -1,0 +1,1450 @@
+
+
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html>
+
+<head>
+	<link rel="stylesheet" href="/defaultroot/template/css/template_default/template.logins_12oa.min.css" />
+  <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>万户ezOFFICE协同管理平台</title>
+	<script type="text/javascript">
+	var whirRootPath = "/defaultroot";
+	var preUrl = "/defaultroot"; 
+	var whir_browser = "chrome"; 
+	var whir_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"; 
+	var whir_locale = "zh_cn"; 
+</script>
+
+
+<script src="/defaultroot/scripts/jquery-1.12.4.min.js" type="text/javascript"></script>
+<script src="/defaultroot/scripts/jquery-migrate-1.4.1.js" type="text/javascript"></script>
+<script src="/defaultroot/scripts/i18n/zh_CN/CommonResource.js" type="text/javascript"></script>
+
+<link   href="/defaultroot/themes/2015/color1/style.css" rel="stylesheet" type="text/css"/>
+
+<script src="/defaultroot/scripts/plugins/lhgdialog/lhgdialog.js?skin=idialog" type="text/javascript"></script>
+
+<script src="/defaultroot/scripts/main/whir.validation.js" type="text/javascript"></script>
+<script src="/defaultroot/scripts/main/whir.application.js" type="text/javascript"></script>
+<script src="/defaultroot/scripts/main/whir.util.js" type="text/javascript"></script>
+<!--[if IE 6]>
+<script src="/defaultroot/scripts/desktop/iepng.js" type="text/javascript"></script>
+<script type="text/javascript">
+EvPNG.fix('img,.scrollArrowLeft,.scrollArrowLeftDisabled,.scrollArrowRight,.scrollArrowRightDisabled,.face_box,.top_boxbg,.bg_01,.bg_02,.topread_box,.skin_btn,.f_person,.hint_area,.facebg,.logo_img,.bg_png,.main_box,.bg_png');
+</script>
+<![endif]-->
+<script type="text/javascript">
+/********公共初始化操作**********************/
+</script>
+
+
+    <script type="text/javascript" src="/defaultroot/scripts/util/cookie.js"></script>
+    <script type="text/javascript" src="/defaultroot/scripts/plugins/security/security.js"></script>
+    <script type="text/javascript" src="/defaultroot/scripts/util/login.js"></script>
+    <script type="text/javascript" src="/defaultroot/scripts/plugins/flexslide/jquery.flexslider.js"></script>
+	<script type="text/javascript" src="/defaultroot/scripts/main/whir.application.js"></script>
+</head>
+<body>
+	<!--<i class ="fa fa-times-circle-o"></i>-->
+	
+		<link rel="stylesheet" href="/defaultroot/template/css/template_system/template.reset.min.css" />
+<link rel="stylesheet" href="/defaultroot/template/css/template_default/template.logins_12oa.min.css" />
+<link rel="stylesheet" href="/defaultroot/template/css/template_system/template.fa.min.css" />
+<link   href="/defaultroot/themes/common/common.css" rel="stylesheet" type="text/css"/>
+<div class="wh-lg-main">
+    <div class="wh-lg-header">
+		<h1><img id="loginPic" src="" data-pich="80"/></h1>
+    </div>
+    <div class="wh-lg-form">
+		<span class="mobile-tip mobile-tip1" id="mobile-tip" onclick="openOrCloseMobile()"></span>
+		<form id="LogonForm" name="LogonForm" action="Logon!logon.action" method="post">
+			<input type="hidden" name="inetAddress" id="inetAddress">
+			<input type="hidden" name="inetIp" id="inetIp">
+			<input type="hidden" name="sysCode" id="sysCode" value="">
+			<input type="hidden" name="random_form" value=-546536134825700227></input>
+			<input type="hidden" id="isRemember" name="isRemember"  class="pass-check">
+			<input type="hidden" id="needCaptcha" name="needCaptcha" value="0">
+			<input type="hidden" id="logonUuid" name="logonUuid" />
+			<input type="hidden" id="sweepResult" name="sweepResult" value="0"/>
+			<div style="display:none">
+				<input type="text" id="domainAccount" name="domainAccount" value="whir" class="acc textOn" />
+				<div class="inputText">单位账号</div>
+			</div>
+			<div id="box1" class="lg-nomal-form" style="display: block;">
+			  
+				<div class="lg-form-con" id="box5">
+					<div class="check-tips formdiv-container">
+						<p><span><span id ="errorTypeRemind"></span><em class="tips-close"></em></span></p>
+						<div class="form-div">
+							<label></label>
+							<input type="text" class="username"  value="" id="userAccount" name="userAccount" placeholder="请输入账号" />
+							<i class ="fa fa-times-circle-o username_clear" style="color:#DDDDDD;position:absolute;top:13px;right:8px;"></i>
+						</div>
+					</div>
+					<div class="formdiv-container formdiv-container2">
+						<div class="form-div">
+							<label ></label>
+							<input type="password" class="password" name="userPassword" value="" id="userPassword" autocomplete="new-password" placeholder="请输入密码" maxlength="20"/>
+							<i class ="fa fa-times-circle-o password_clear" style="color:#DDDDDD;position:absolute;top:13px;right:8px;"></i>
+							<input type="hidden" id="userPasswordTemp" name="userPasswordTemp"/>
+							<input type="hidden" id="time" name="time"/>
+						</div>
+					</div> 
+					
+					<div class="form-pass-div clearfix">
+						<div class="rm-password" onclick="rember(this)" id="passswordcron" ><em></em></div>
+						<span >记住密码</span>		  
+						<a id="resetPasswordSPAN" style="display:none;" href="javascript:void(0)"  >找回密码</a>
+					</div>
+					<div class="denglu">
+						<input type="button" id="mysubmit" value="登录" class="lg-submit-btn" onClick="javascript:submitForm();" />
+					</div>
+					<input type = "hidden" id = "localeCode" name="localeCode" />
+					<input type="hidden" id="uid" name="uid" />
+					<input type="hidden" id="token" name="token" />
+				</div>
+			</div>
+			<div id="box4" class="lg-nomal-form" style="display: none;margin-top:50px;">
+				<div class="lg-form-con">
+					<div class="lg-form-tip">
+						<img src="" class="user" id ="empLivingPhoto" style="cursor: pointer;" onclick ="submitByPhoto()" />
+						<p class="user-name" id="empName"></p>
+					</div>
+					<div class="form-pass-div form-pass-div2 clearfix">
+						<div class="rm-password rm-password2" onclick="rember(this)"><em></em></div>
+						<span>记住密码</span>	
+					</div>
+					<div class="denglu">
+						<input style="width:120px" type="button" id="mysubmit1" value="登录" class="lg-submit-btn" onClick="javascript:submitForm();" />
+					</div>
+				</div>
+			</div>
+		</form>
+		<!--找回密码页面----start---->
+		<form id="sendMassageForm" name="sendMassageForm" action="/defaultroot/ResetPasswordAction!sendMessage.action" method="post">
+			<div id="box2" class="lg-nomal-form" style="display: none;">
+				<div class="lg-form-con">
+					<div class="check-tips formdiv-container">
+						<p><span><span id ="errorTypeRemind2"></span><em class="tips-close"></em></span></p>
+						<div class="form-div form-div2">
+						
+							<input type="text" class="username"  placeholder='请输入手机号码'  id="phoneNum" name="phoneNum" value="" maxlength="11"　whir-options="vtype:['notempty',{'maxLength':11},'spechar3']"/>
+							<a href="javascript:void(0)" id="resetPasswordButton" onclick="sendMessageAction()">发送</a>
+						
+							
+						</div>
+					</div>
+					<div class="formdiv-container">
+						<div class="form-div">
+							<input type="text" name="checkCode" id="checkCode"  value="" whir-options="vtype:['notempty',{'maxLength':6},'spechar3']" placeholder='请输入验证码'   style="width:289px"/>
+						</div>
+					</div>
+					<div class="formqued clearfix">
+						<a onclick="check();" href="javascript:void(0)" >确定</a>
+					</div>
+					<div class="denglu">
+						<input id="back-login1" type="" name="" value='返回登录页' class="lg-submit-btn" onclick="backToLogin();" />
+					</div>
+				</div>
+			</div>
+		</form>
+		
+		<form id="resetPasswordForm" name="resetPasswordForm" action="" method="post">
+			<input type = "hidden" id = "name" name="name" />
+			<input type = "hidden" id = "isPasswordRule" name="isPasswordRule" />
+			<input type = "hidden" id = "empId" name="empId" />
+			<input type = "hidden" id = "checkcodeTemp" name="checkcodeTemp" />
+			<input type = "hidden" id = "phoneTemp" name="phoneTemp" />
+			<input type = "hidden" id = "userAccountTemp" name="userAccountTemp" />
+			<div id="box3" class="lg-nomal-form" style="display: none;">
+				<script>
+					var isPasswordRule = document.getElementById("isPasswordRule").value;
+					var pass_role = "";
+					$('#pass_role').val(pass_role);
+				</script>
+				<div class="lg-form-tip" style="display: none;">
+					<div>
+						<p id = "pass_role"></p>
+					</div>
+				</div>
+				<div class="lg-form-con">
+					<div class="check-tips formdiv-container">
+						<p><span><span id ="errorTypeRemind3"></span><em class="tips-close"></em></span></p>
+						<div class="form-div">
+							<input  placeholder='新密码'   type="password" name="newpassword" id="newpassword"  value="" whir-options="vtype:['notempty','spechar3']" maxlength="20"  style="width:260px" />
+						</div>
+					</div>
+					<div class="formdiv-container">
+						<div class="form-div">
+							<input type="password" name="confimpassword" id="confimpassword"  value="" whir-options="vtype:['notempty','spechar3']" maxlength="20"  placeholder='密码确认' style="width:260px"/>
+						</div>
+					</div>
+					<div class="formqued clearfix" style="width: 290px;margin: 0 auto;">
+						<a onclick="save();" href="javascript:void(0)" style="width: 120px;float: left;">保　存</a>
+						<a onclick="cancle();" href="javascript:void(0)" style="width: 120px;float: left;margin-left:50px;" >重　置 </a>
+					</div>
+					<div class="denglu">
+						<input id="back-login3" type="" name="" value='返回登录页' class="lg-submit-btn" onclick="backToLogin();"/>
+					</div>
+				</div>
+			</div>
+		</form>
+		<!--找回密码页面----end ---->
+		<!--弱密码修改密码 start 20171024 chenlei-->
+		<form id="modPwdWeakForm" name="modPwdWeakForm" action="" method="post">
+		    
+			<input type="hidden" id="empId_weak" name="empId_weak" value=""/>
+			<input type="hidden" id="userAccount_weak" name="userAccount_weak" value=""/>
+			<div id="box6" class="lg-nomal-form" style="display: none;">
+				<script>
+				</script>
+				<div class="lg-form-tip" style="display: none;">
+					<div>
+						<p id = "pass_tip_weak"></p>
+					</div>
+				</div>
+				<div class="lg-form-con">
+					<div class="check-tips formdiv-container">
+						<p><span><span id ="errorTypeRemind4"></span><em class="tips-close"></em></span></p>
+						<div class="form-div">
+							<input  placeholder='旧密码'  type="password" name="oldpassword_weak" id="oldpassword_weak"  value="" whir-options="vtype:['notempty','spechar3']" maxlength="20"  style="width:260px" />
+						</div>
+					</div>
+					<div class="formdiv-container">
+						<div class="form-div">
+							<input  placeholder='新密码'  type="password" name="newpassword_weak" id="newpassword_weak"  value="" whir-options="vtype:['notempty','spechar3']" maxlength="20"  style="width:260px" />
+						</div>
+					</div>
+					<div class="formdiv-container">
+						<div class="form-div">
+							<input type="password" name="confimpassword_weak" id="confimpassword_weak"  value="" whir-options="vtype:['notempty','spechar3']" maxlength="20"  placeholder='密码确认' style="width:260px" />
+						</div>
+					</div>
+					<div class="formqued clearfix">
+						<a onclick="weakPwdSave();" href="javascript:void(0)" >确　定</a>
+					</div>
+					<div class="denglu">
+						<input id="back-login2" type="" name="" value='返回登录页' class="lg-submit-btn" onclick="backToLogin();"/>
+					</div>
+				</div>
+			</div>
+		</form>
+		<!--弱密码修改密码 end 20171024 chenlei-->
+		<div id="box8" class="lg-nomal-form" style="display: none;">
+			<div class="lg-form-con" style="text-align:center;">
+				<img id="qrimg" alt="" src=""></img>
+				<br/>
+				<span id="sweepTip">请打开手机evo客户端扫一扫登录</span>
+			</div>
+        </div>
+		<div class="lg-mobile-slide" >
+			<span class="left-line"></span>
+			<div class="wh-lg-setting">
+				<!-- <a href="/defaultroot/help/help_set.html" target="help_window"   class="help"><i class="fa fa-cog2"></i><span title="设置帮助">设置帮助</span></a> -->
+				<div href="javascript:void(0)" class="wh-lg-select"  >
+					
+					<span class="lg-select-span sl1 " id = "localeCode1" onClick="openOrCloselang()">
+						<span>简体中文</span>
+					
+					</span>
+					<ul class="sele-list-lang clearfix"  id="sele-list-ul" >
+						<li  class="current" id = "jtzw"><span class="sl1"  value="zh_CN" onclick="selectLauguale(this)">简体中文</span><i class="fa fa-check-circle-o"></i></li>
+						<li  id = "ftzw"><span value="zh_TW" class="sl2" onclick="selectLauguale(this)">繁體中文</span><i class="fa fa-check-circle-o"></i></li>
+						<li  id = "yw"><span value="en_US" class="sl3" onclick="selectLauguale(this)">English</span><i class="fa fa-check-circle-o"></i></li>
+						<li  id = "hw"><span value="ko_KR" class="sl4" onclick="selectLauguale(this)">한국의</span><i class="fa fa-check-circle-o"></i></li>
+						<li  id = "rw"><span value="ja_JP" class="sl5" onclick="selectLauguale(this)">日本語</span><i class="fa fa-check-circle-o"></i></li>
+					</ul>
+				</div>
+			</div>
+			<div class="flexslider">
+				<ul class="slides" id="ewmStyle">
+				<!-- 遍历二维码 -->
+				
+					<li>
+						<p></p>
+					</li>
+				             	
+				</ul>
+			</div>
+			<div class="wh-lg-logoIn-top-title">
+				<span>请使用手机打开微信或微博的“扫一扫”功能</span>
+			</div>
+		</div>
+    </div>
+</div>
+<div class="wh-lg-footer">
+	<p>孝义市鹏飞实业有限公司</p>
+</div>
+<div id="fullpage">
+	 		
+	<div class="section " name="backgroudimage" style="background-image:url('/defaultroot/upload/loginpage/202211/2022112115261525510649386.jpg'); background-size: cover;display:block;background: none\9;-ms-filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/defaultroot/upload/loginpage/202211/2022112115261525510649386.jpg',sizingMethod='scale');filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/defaultroot/upload/loginpage/202211/2022112115261525510649386.jpg',sizingMethod='scale');"> </div>
+	
+	
+</div>
+<script type="text/javascript" src="/defaultroot/scripts/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/defaultroot/scripts/plugins/jquery/jquery.easing.min.js"></script>
+<script type="text/javascript" src="/defaultroot/scripts/plugins/fullpage/jquery.fullPage.min.js"></script>
+<script type="text/javascript" src="/defaultroot/scripts/plugins/flexslide/jquery.flexslider.js"></script>
+<!--  cocall的账号、uid、misid以及token、server -->
+<script type="text/javascript" >
+/* * jQuery placeholder, fix for IE6,7,8,9 * start */
+var JPlaceHolder = {
+	//检测    
+	_check : function(){
+		return 'placeholder' in document.createElement('input');
+	},
+	//初始化
+	init : function(){
+		if(!this._check()){           
+			this.fix();        
+		}
+	},
+	//修复
+	fix : function(){
+		jQuery(':input[placeholder]').each(function(index, element) {
+			var self = $(this), txt = self.attr('placeholder');
+			self.wrap($('<div class="fontbox"></div>').css({}));
+			var pos = self.position(), h = self.outerHeight(true), paddingleft = self.css('padding-left');
+			var holder = $('<span></span>').text(txt).css({}).appendTo(self.parent());
+			self.focusin(function(e) {
+				holder.hide();
+			}).focusout(function(e) {
+				if(!self.val()){
+					holder.show();
+				}
+			});
+			holder.click(function(e) {
+				holder.hide();
+				self.focus();
+			});
+		});
+	}
+};
+//执行
+jQuery(function(){    
+	JPlaceHolder.init();    
+});
+$(document).ready(function() {
+	// 扫码登录增加js
+	$(".sweepcode").click(function() {
+		var aaa = $("#tab1");
+		if (aaa.hasClass("openewm")) {
+			$.ajax({
+				url: "/defaultroot/Logon!cancelScanLogon.action?logonUuid="+$("#logonUuid").val(),
+				cache: false,
+				async: true,
+				success: function(dataForm) {
+					var data = eval('('+dataForm+')');
+					if(data.result=="true"){
+
+					}
+				}
+			});
+			aaa.removeClass("openewm");
+			$("#useraccountlogon").hide();
+			$("#sweeplogon").show();
+			$("#box5").show();
+			$("#logonUuid").val("");
+		} else {
+			getLogonQRcode();
+			aaa.addClass("openewm");
+			$("#useraccountlogon").show();
+			$("#sweeplogon").hide();
+			$("#box5").hide();
+			$("#box4").hide();
+			$(".refresh").css("display","none");
+		}
+	});
+	// 自动滚动
+	setInterval(function(){
+		$.fn.fullpage.moveSectionDown();
+	}, 10000);
+	//改变div的高度
+	$(".wh-lg-form").height($(window).height());
+	$(".lg-mobile-slide").height($(window).height());
+	$(".left-line").height($(window).height()*0.7);
+	//语言选择下拉
+	$(".sele-list li").click(function(){
+		$(this).addClass("open").siblings().removeClass("open");
+		$(".lg-select-span").html($(this).text());
+		$(".lg-select-span").removeClass("sl1 sl2 sl3 sl4 sl5");
+		var index =  $(".sele-list li").index(this)+1;
+		$(".lg-select-span").addClass("sl"+index);
+	});
+	getdata();//加载日期 
+});
+
+//fullPage
+$('#fullpage').fullpage({
+  loopBottom: true,
+  navigation: true,
+  navigationPosition: 'right'
+});
+
+//关闭div层
+function closeIewarning(){
+	$("#iewarning").hide();
+}
+
+$(function(){
+	//通过二维码状态判断是否显示二维码
+	var qrcodeStatus = '0';
+	if(qrcodeStatus == "0" || qrcodeStatus == null || qrcodeStatus == ""){
+		$("#submitTyle").addClass("wh-login-cons wh-lg-no-button");
+		$("#ewmStyle").hide();
+	}
+    //动态赋高
+    function scrh(obj){
+        var scrHeight=document.body.scrollHeight;
+        obj.css({'height':scrHeight});
+    }
+    $(function(){
+   	    var scrH=$(".wh-pg-login,.wh-lg-slider");
+		scrh(scrH);
+		var resizeTimer;
+		function resizeFunction() {
+			scrh(scrH);
+		};
+		$(window).resize(function() {
+			clearTimeout(resizeTimer);
+			resizeTimer = setTimeout(resizeFunction, 300);
+		});            
+		resizeFunction();  
+        $(".flex-next").text('');
+        $(".flex-prev").text('');
+        var sele_bd = $(".sele-list-div");
+        var sele_list = $(".sele-list");
+        var wh_llnav = $(".wh-lg-logoIn-nav li");
+        var wh_lltop = $(".wh-lg-logoIn-top");
+		
+        $(".sele-show").click(function () {
+            sele_bd.show();
+            sele_list.show(200);
+            return false;
+        });
+		
+        sele_list.find("li").click(function(){
+            sele_list.hide();
+            sele_bd.hide();
+            return false;
+        });
+
+        $("body").click(function () {
+            sele_bd.hide();
+            sele_list.hide();
+        });
+
+        $(".info").focus(function(){
+            $(this).parent().css("border-color","#0c89e1");
+        });
+        $(".info").blur(function(){
+            $(this).parent().css("border-color","#666");
+        });
+        $(".info").hover(function(){
+            $(this).parent().css("border-color","#0c89e1");
+        },function(){
+            $(this).parent().css("border-color","#666");
+        });
+        $(".image").hover(function(){
+            $(this).css("border-color","#0c89e1");
+        },function(){
+            $(this).css("border-color","#666");
+        });
+		wh_llnav.on("click",function(){
+			var $this = $(this);
+			var index = $this.index();
+			$this.addClass("current").siblings().removeClass("current");
+			wh_lltop.hide().eq(index).show();
+			if(index == 1){
+				$('.flexslider').flexslider({
+					animation: "slide",
+					directionNav: true,
+					controlNav: false,
+					slideshowSpeed: 700000
+				});
+			}
+		});
+    }); 
+});
+
+
+function mychecked(obj){
+	if(obj.checked){
+		document.getElementById("isRemember").value= "1";
+	}else{
+		document.getElementById("isRemember").value= "0";
+	}
+}
+
+function load(){
+	//去除原来下拉框的设置
+	
+		loadCookie('/defaultroot');
+	
+	$('#userAccount').bind('input propertychange', function() {
+		$('#userPassword').val("");
+		$('#empLivingPhoto').attr("src","/defaultroot/images/noliving_middle.gif");
+	});
+	var isRemember=$("#isRemember").val();
+	
+	if(isRemember=='1'){
+	   $("#box5").css("display","none");
+	   $("#box4").css("display","block");
+	   $("#captchaDiv").css("display","none");
+	   $("#needCaptcha").val("1");
+	   $('#userAccount').bind('input propertychange', function() {
+			$("#captchaDiv").css("display","block");
+		});
+	}
+	
+	
+	//	document.LogonForm.userPassword.focus();
+	
+}
+
+function getdata(){
+	var myDate = new Date();
+	var year = myDate.getFullYear();    //获取完整的年份(4位,1970-????)
+	var mon = myDate.getMonth()+1;       //获取当前月份(0-11,0代表1月)
+	var day = myDate.getDate();        //获取当前日(1-31)
+	$("#weather").html("今天是"+year+"年"+mon+"月"+day+"日");
+}
+
+
+/**
+ * 展开更多
+ */
+function openOrCloseMobile(){
+	//移动版本
+	var mobile_form = $(".wh-lg-form"); 
+	$(".mobile-tip").addClass("mobile-tip1");
+	if(mobile_form.hasClass("move-left")){
+		mobile_form.removeClass("move-left");
+		$(".lg-mobile-slide").removeClass("lg-mobile-slide1");
+	} else {
+		$('.flexslider').flexslider({
+			animation: "slide",
+			directionNav: true,
+			controlNav: false,
+			slideshowSpeed: 3000
+		});
+		mobile_form.addClass("move-left");
+		$(".mobile-tip").removeClass("mobile-tip1");
+		$(".lg-mobile-slide").addClass("lg-mobile-slide1");
+	}
+	setTimeout(function(){
+		$('.flex-prev').click();
+	}, 200);
+}
+
+/**
+ * 打开关闭语言选择框
+ */
+function openOrCloselang(){
+	var selectlist = $("#sele-list-ul");
+	if (selectlist.hasClass("open")) {
+		selectlist.removeClass("open");
+	} else {
+		selectlist.addClass("open");
+	}
+}
+
+/**
+ * 记住密码
+ */
+function rember(aaaa) {
+	if($(aaaa).hasClass("rm-password2")){
+		var isRemembertemp=$("#isRemember").val();
+		if(isRemembertemp=='1'){
+			$("#box5").css("display","block");
+			$("#box4").css("display","none");
+			$("#passswordcron").removeClass("rm-password2");
+		}
+		$(aaaa).removeClass("rm-password2");
+		document.getElementById("isRemember").value= "0";
+	} else{
+		$(aaaa).addClass("rm-password2");
+		document.getElementById("isRemember").value= "1";
+	}
+}
+		
+function openSweepLogon(obj){
+	if(obj.innerText=='切换扫码登录'){
+		$("#box1").css("display","none");
+		$("#box8").css("display","block");
+		obj.innerText='切换账号登录';
+		getLogonQRcode();
+	}else{
+		obj.innerText='切换扫码登录';
+		backToLogin();
+	}
+}
+</script>
+
+
+ 
+
+
+
+	
+	
+ </body>
+
+</html>
+<script type="text/javascript" >
+$(function(){
+	$(".username_clear").click(function(){
+		$("#userAccount").val("");
+	})
+	$(".password_clear").click(function(){
+		$("#userPassword").val("");
+	})
+})
+//改变div的高度
+window.onresize = function(){
+	$(".wh-lg-form").height($(window).height());
+	$(".lg-mobile-slide").height($(window).height());
+	$(".left-line").height($(window).height()*0.7);
+}
+
+$(document).ready(function(){
+	//刷新二维码
+	$(".refresh").click(function() {
+		getLogonQRcode();
+		$(".refresh").css("display","none");
+	});
+
+	//改变div的高度
+	$(".wh-lg-form").height($(window).height());
+	$(".lg-mobile-slide").height($(window).height());
+	$(".left-line").height($(window).height()*0.7);
+	
+	var userAccount = $('#userAccount');
+	userAccount.focus();
+	var html="<img class='ui_icon_bg' src='/defaultroot/scripts/plugins/lhgdialog/skins/icons/alert.gif'/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='font-size:15px'>正在自动登陆中...</span>";
+	
+	//cocall的整合
+	var ccstatus='null';
+	var fromcc = '0';
+	var token ="";
+	if(0!=ccstatus&&fromcc==1){
+		
+			var portArr=new Array();
+			portArr[0]="12700";
+			portArr[1]="12702";
+			portArr[2]="12704";
+			portArr[3]="12706";
+			portArr[4]="12708";
+			for(var i=0;i<portArr.length;i++){
+				var port1 = portArr[i];
+				btn_get_account_Click(port1);
+			}
+		
+	}
+
+	$(".tips-close").click(function(){
+		$(".check-tips").removeClass("error");
+	});
+
+	//找回密码
+	$("#resetPasswordSPAN").click(function () {
+      $("#box2").css("display","block");
+      $("#box1").css("display","none");
+	  $(".check-tips").removeClass("error");
+    });
+	
+
+	
+});
+
+/**
+ *返回登录页
+ */
+function backToLogin(){
+  $("#box6").css("display","none");
+  $("#box2").css("display","none");
+  $("#box3").css("display","none");
+  $("#box1").css("display","block");
+  $('#phoneNum').val('').change();
+  $('#checkCode').val('').change();
+  $(".check-tips").removeClass("error");
+  document.LogonForm.userAccount.focus();
+}
+
+$(function(){
+	//对语言赋值
+	var localeCode = 'zh_CN';
+	initLang(localeCode);
+	
+	//不同浏览器时需要隐藏
+	var srcName = '';
+	if(srcName == "" || srcName == "undefined" || srcName == null){
+		$("#loginPic").hide();
+	}
+	
+	//判断找回密码功能
+	var resetPassword = '0';
+	if(resetPassword=='1'){
+		
+			document.getElementById("resetPasswordSPAN").style.display="inline-block";
+		
+	}
+});
+
+/**
+ * 点击头像登录
+ */
+function submitByPhoto(){
+	var empLivingPhoto = document.getElementById("empLivingPhoto").src;
+	if(empLivingPhoto != "" && empLivingPhoto !="/defaultroot/images/noliving.gif"){
+		submitForm();
+	}
+}
+
+$(document).keydown(function(e){
+	var theEvent = window.event || e; 
+	var code = theEvent.keyCode || theEvent.which;
+	if (code == 13) { 
+		var lgForm = $(".lg-nomal-form");
+		var parentId = "";
+		for(var i=0;i<lgForm.length;i++){
+			if(lgForm[i].style.display != "none"){
+				parentId = lgForm[i].parentElement.id;
+				break;
+			}
+		}
+		if ("LogonForm" == parentId) {
+			submitForm();
+		} else if ("sendMassageForm" == parentId) {
+			check();
+		} else if ("resetPasswordForm" == parentId) {
+			save();
+		} else if ("modPwdWeakForm" == parentId){
+			weakPwdSave();
+		}
+	}
+});
+
+var errorTypeRemind = $('#errorTypeRemind');
+function checkForm(){
+	//需要对隐藏域重新赋值
+	$("#localeCode").val("zh_CN");	
+
+	//判断是否为扫码登录
+	var logonUuid=$("#logonUuid").val();
+	if(logonUuid!=null && logonUuid!=''){
+	return true;
+	}
+
+	if(document.LogonForm.userAccount.value==""||document.LogonForm.userAccount.value=="请输入账户"){
+		var remindText = '请输入正确的账号！';
+		errorTypeRemind.html(remindText);
+		showError(1);	
+		document.LogonForm.userAccount.focus();       
+		return false;
+	}else if( document.LogonForm.userPassword.value==""){
+		var remindText = '请输入正确的密码！';
+		
+		errorTypeRemind.html(remindText);
+		showError(1);
+		document.LogonForm.userPassword.focus();
+		
+		return false;
+	}
+	 var captchaAnswer = $('#captchaAnswer').val();
+	 
+	 if(captchaAnswer==""){
+		var captchaDisplay = $('#captchaDiv')[0].style.display;
+		if( captchaDisplay !="none"){
+			var remindText = '请输入验证码！';
+			errorTypeRemind.html(remindText);
+			showError(1);
+			document.LogonForm.captchaAnswer.focus();
+			return false;			
+		}
+	 }
+	return true;
+}
+
+/**
+ * 选择语言
+ */
+function selectLauguale(obj){
+	if(obj.innerText != ""){
+	 var localcode  = obj.getAttribute('value');
+	 $("#localeCode1").val(obj.innerText);
+	 $("#jtzw").removeClass("current");
+	
+	 location.href = "login.jsp?localeCode="+localcode;
+	}
+}
+
+function showError(i){
+	if(i==1){
+		$(".check-tips").addClass("error"); 
+		var timer1 =setInterval(function(){
+			$(".check-tips").removeClass("error");
+			clearInterval(timer1);
+		},5000);
+	}else{
+		$(".check-tips").removeClass("error");
+	}
+}
+
+function initLang(localeCode){
+	var language = "zh-cn";
+	if(localeCode == 'zh_TW'){
+		language = "zh-tw";
+	}else if(localeCode == 'en_US'){
+		language = "en-us";
+	}else if(localeCode == 'ko_KR'){
+		language = "ko-kr";
+	}else if(localeCode == 'ja_JP'){
+		language = "ja-jp";
+	}
+	$("#loginHtml").attr("lang",language);
+}
+
+window.onload = function (e) {
+    load();
+    checkBrowser();				
+}
+
+function killerrors() {
+    return true; 
+}
+window.onerror = killerrors;
+var errorTypeRemind = $('#errorTypeRemind');
+var errorTypeRemind4 = $('#errorTypeRemind4');
+
+
+//--------------------------找回密码script----------------------------------start
+var errorTypeRemind2 = $('#errorTypeRemind2');
+var errorTypeRemind3 = $('#errorTypeRemind3');
+var sleep = 60, interval = null;
+
+//发送邮件验证码修改密码　-by chenlei 20180605
+function sendMailAction(){
+	var btn = document.getElementById('resetPasswordButton');
+	var userAccountMail = $('#userAccountMail').val();
+	$.ajax({
+		url: "/defaultroot/ResetPasswordAction!sendCheckcodeByMail.action?userAccountMail="+userAccountMail,
+		cache: false,
+		async: true,
+		success: function(dataForm) {
+			var data = eval('('+dataForm+')');
+			if(data.result=="false"){
+				var res = data.data.res;
+				var remindText =res;
+				errorTypeRemind2.html(remindText);
+				 showError(1);
+			}
+			if(data.result=="true"){
+				//邮件发送成功，请去邮箱中查看！
+				var remindText ='邮件发送成功，请去邮箱中查看！';
+				errorTypeRemind2.html(remindText);
+				 showError(1);
+				 if (!interval){
+					btn.disabled = "disabled";
+					btn.removeAttribute ('onclick');
+					btn.style.cursor = "wait";
+					btn.innerText="(" + sleep-- + ")";
+					interval = setInterval (function ()
+					{
+						if (sleep == 0){
+							if (!!interval){
+								clearInterval (interval);
+								interval = null;
+								sleep = 60;
+								btn.style.cursor = "pointer";
+								btn.removeAttribute ('disabled');
+								btn.innerHTML = '发送';
+								btn.setAttribute('onclick','sendMailAction()');
+							}
+							return false;
+						}
+						btn.innerText = "(" + sleep-- + ")";
+					}, 1000);
+				}
+			}
+		}
+	});
+}
+
+function sendMessageAction(){
+	var btn = document.getElementById('resetPasswordButton');
+	//校验手机号码
+	var mobile = $('#phoneNum').val();
+	var re =  CheckMobile(mobile);
+	if(re){
+		var phoneNum = document.getElementById("phoneNum").value;
+		//根据电话号码匹配用户 
+		$.ajax({
+			url: "/defaultroot/ResetPasswordAction!getEmployeeByPhone.action?phoneNum="+phoneNum,
+			cache: false,
+			async: true,
+			success: function(dataForm) {
+				var data = eval('('+dataForm+')');
+				if(data.result=="false"){
+					var res = data.data.res;
+					var remindText =res;
+					errorTypeRemind2.html(remindText);
+					 showError(1);
+				}
+				if(data.result=="true"){
+					var remindText ='短信发送成功，请查看手机！';
+					errorTypeRemind2.html(remindText);
+					 showError(1);
+					 if (!interval){
+						btn.disabled = "disabled";
+						btn.removeAttribute ('onclick');
+						btn.style.cursor = "wait";
+						btn.innerText="(" + sleep-- + ")";
+						interval = setInterval (function ()
+						{
+							if (sleep == 0){
+								if (!!interval){
+									clearInterval (interval);
+									interval = null;
+									sleep = 60;
+									btn.style.cursor = "pointer";
+									btn.removeAttribute ('disabled');
+									btn.innerHTML = '发送';
+									btn.setAttribute('onclick','sendMessageAction()');
+								}
+								return false;
+							}
+							btn.innerText = "(" + sleep-- + ")";
+						}, 1000);
+					}
+				}
+			}
+		});
+	}
+}
+
+/**
+ * 校验手机号码
+ */
+function CheckMobile(mobile){
+	var reg =/^0{0,1}(13[0-9]|15[0-9]|17[0-9]|18[0-9])[0-9]{8}$/;
+	if(!reg.test(mobile)){ 
+		var remindText ='您的手机号码不正确，请重新输入！';
+		errorTypeRemind2.html(remindText);
+		showError(1);
+		document.sendMassageForm.phoneNum.focus();
+		return false; 
+	}else{
+		return true;
+	} 
+}
+
+function check(){
+	var checkType='phone';
+	var phoneNum='';
+	var userAccountMail='';
+	var checkValue = $.trim(document.getElementById("checkCode").value);
+	if(document.getElementById("phoneNum")==null || document.getElementById("phoneNum")==undefined){
+		userAccountMail = $('#userAccountMail').val();
+		checkType='mail';
+	}else{
+		phoneNum = $.trim(document.getElementById("phoneNum").value);
+	}
+	if((phoneNum==null||phoneNum=="") && checkType=='phone'){
+		var remindText ='手机号码不能为空！';
+		errorTypeRemind2.html(remindText);
+		showError(1);
+	}
+	if(checkValue==null||checkValue==""){
+		var remindText ='验证码不能为空！';
+		errorTypeRemind2.html(remindText);
+		showError(1);
+	}
+	if(((phoneNum!=null&&phoneNum!="")||(userAccountMail!=null&&userAccountMail!=""))&&checkValue!=null&&checkValue!=""){
+		$.ajax({
+			url: "/defaultroot/ResetPasswordAction!getSMSCheckcodePOByPhone.action?phoneNum="+phoneNum+"&checkcode="+checkValue+"&userAccountMail="+userAccountMail,
+			cache: false,
+			async: true,
+			success: function(dataForm) {
+				var data = eval('('+dataForm+')');
+				if(data.result=="true"){
+					var str  = JSON.stringify(data.data);
+					ajaxgetAttribute(phoneNum,checkValue,userAccountMail);
+					openBox3();
+				}else{
+					var remindText ='验证码错误！';
+					errorTypeRemind2.html(remindText);
+					showError(1);
+				}
+			}
+		});
+	}
+}
+
+/**
+ * 重置密码页面
+ */
+function  ajaxgetAttribute(phoneNum,checkValue,userAccountMail){
+	$.ajax({
+		url: "/defaultroot/ResetPasswordAction!ajaxgetAttribute.action?phoneNum="+phoneNum+"&checkcode="+checkValue+"&userAccountMail="+userAccountMail,
+		cache: false,
+		async: true,
+		success: function(dataForm) {
+			var data = eval('('+dataForm+')');
+			if(data.result=="true"){
+				var empId = data.data.empId;
+				$('#empId').val(empId);
+				var name = data.data.name;
+				$('#name').val(name);
+				var isPasswordRule = data.data.isPasswordRule;
+				$('#isPasswordRule').val(isPasswordRule);
+				var checkcode = data.data.checkcode;
+				$('#checkcodeTemp').val(checkcode);
+				var phone = data.data.phone;
+				$('#phoneTemp').val(phone);
+				var userAccountTemp = data.data.userAccountTemp;
+				$('#userAccountTemp').val(userAccountTemp);
+			}else{
+				
+			}
+		}
+	});
+}
+
+/**
+ * 打开找回密码修改密码页面
+ */
+function openBox3(){
+  $("#box2").hide();
+  $("#box3").show();
+  $("#newpassword").val("");
+  $("#confimpassword").val("");
+  $(".check-tips").removeClass("error");
+}
+
+/**
+ * 不启用密码规则校验密码
+ */
+function ConfimPassword(){
+  var isPasswordRule = $('#isPasswordRule').val();
+   var re =false;
+   if(isPasswordRule=="0"){
+	   var password = document.getElementById("newpassword").value;
+		var confimpassword =  document.getElementById("confimpassword").value;
+		if(password.length<6){
+			var remindText ='密码长度不能少于6位,请重新输入！';
+			errorTypeRemind3.html(remindText);
+			showError(1);
+			return re;
+		}else{
+			if(password!=confimpassword){
+				var remindText ='两次输入密码不一致,请重新输入！';
+				errorTypeRemind3.html(remindText);
+				showError(1);
+				document.getElementById("password").focus();
+				document.getElementById("password").value="";
+				return re;
+			}
+		}
+		re=true;
+		return re;
+   }else{
+		var r = checkPasswordByRule();
+		return r;
+   }
+}
+
+/**
+ * 找回密码页面-保存密码
+ */
+function save(){
+   var password = document.getElementById("newpassword").value;
+   if(password == ''){
+		var remindText ='输入的密码不能为空！';
+		errorTypeRemind3.html(remindText);
+		showError(1);
+		document.getElementById("password").focus();
+		return false;
+   }
+
+	var r = false;
+	if(true){ //启用密码规则
+		r = true;
+	}else{//不启用密码规则
+		r = ConfimPassword();
+	}
+
+	if(r){
+		var password = document.getElementById("newpassword").value;
+		var userAccountMail= document.getElementById("userAccountTemp").value;;
+		var confimpassword =  document.getElementById("confimpassword").value;
+		var checkcode=document.getElementById("checkcodeTemp").value;
+		var phone=document.getElementById("phoneTemp").value;
+		if(password!=confimpassword){
+			//两次输入密码不一致,请重新输入！
+			var remindText ='两次输入密码不一致,请重新输入！';
+			errorTypeRemind3.html(remindText);
+			showError(1);
+			document.getElementById("password").focus();
+		}else{
+			var key = RSAUtils.getKeyPair("010001", "", "0086dd23d3e1fb5660e83468945e851c666d63512b799c4e29694bf54dc7877f1e9787531161c5bad76a16e497f8273136b6336d4919f8d7786e023b4a8b23d1f80a9a524210acfd2b504b4a02043c9d68f51a22ec4c111e2890f185955197301e8089f9bfe047e0e1a84d81d3b1c3f19cf43633264681a0cc60d2812bcd441001");
+			password = RSAUtils.encryptedString(key, password);
+			var datastr={"newpassword":password,"phoneNum":phone,"checkcode":checkcode,"userAccountMail":userAccountMail};
+			$.ajax({
+				url: "/defaultroot/ResetPasswordAction!modifyPassword.action",
+				cache: false,
+				async: true,
+				data:datastr,
+				success: function(dataForm) {
+				
+					var data = eval('('+dataForm+')');
+					if(data.result=="true"){
+						//密码修改成功
+						var remindText ='密码修改成功 ！';
+						errorTypeRemind3.html(remindText);
+						showError(1);
+						var t1 = setInterval(function(){
+							backToLogin();
+							clearInterval(t1);
+						},3000);
+						
+					}else{
+						//密码修改失败 ,请稍后再试
+						var remindText ='密码修改失败 ,请稍后再试 ！';
+						if(data.data.errorMsg!=null){
+							remindText =data.data.errorMsg;
+						}
+
+						errorTypeRemind3.html(remindText);
+						showError(1);
+					}
+				}
+			});
+		}
+	}
+}
+
+function weakPwdSave(){
+   /*chenlei 20171025密码加密[BEGIN]*/
+   var oldpassword_weak = $("#oldpassword_weak").val();
+   var newpassword_weak = $("#newpassword_weak").val();
+   var confimpassword_weak = $("#confimpassword_weak").val();
+   var empId_weak = $("#empId_weak").val();
+   if(oldpassword_weak == ''){
+		var remindText ='旧密码不能为空！';
+		errorTypeRemind4.html(remindText);
+		showError(1);
+		return false;
+   }
+   if(newpassword_weak == ''){
+		var remindText ='新密码不能为空！';
+		errorTypeRemind4.html(remindText);
+		showError(1);
+		return false;
+   }
+   var userAccount_weak = $("#userAccount_weak").val();
+   if(newpassword_weak!=confimpassword_weak){		
+		var remindText ='两次输入密码不一致,请重新输入！';
+		errorTypeRemind4.html(remindText);
+		 showError(1);
+		//两次输入密码不一致,请重新输入
+		document.getElementById("newpassword_weak").focus();
+		$("#newpassword_weak").val("");
+		$("#newpassword_weak").blur();
+		$("#confimpassword_weak").val("");
+		$("#confimpassword_weak").blur();
+		return false;
+	}
+	var key = RSAUtils.getKeyPair("010001", "", "0086dd23d3e1fb5660e83468945e851c666d63512b799c4e29694bf54dc7877f1e9787531161c5bad76a16e497f8273136b6336d4919f8d7786e023b4a8b23d1f80a9a524210acfd2b504b4a02043c9d68f51a22ec4c111e2890f185955197301e8089f9bfe047e0e1a84d81d3b1c3f19cf43633264681a0cc60d2812bcd441001");
+	oldpassword_weak = RSAUtils.encryptedString(key, oldpassword_weak);
+	newpassword_weak = RSAUtils.encryptedString(key, newpassword_weak);
+	$("#oldpassword_weak").val(oldpassword_weak);
+	$("#newpassword_weak").val(newpassword_weak);
+	$("#confimpassword_weak").val(newpassword_weak);
+	/*xiehd 20160411密码加密[END]*/
+	
+	var datastr_weak={"empId_weak":empId_weak,"userAccount":userAccount_weak,"oldMyPassword":oldpassword_weak,"newMyPassword":newpassword_weak};
+	$.ajax({
+			url: "/defaultroot/ResetPasswordAction!updateMyPassword.action",
+			cache: false,
+			async: true,
+			data:datastr_weak,
+			success: function(dataForm) {
+				var data = eval('('+dataForm+')');
+				if(data.result=="success"){
+					var remindText ='密码修改成功 ！';
+					errorTypeRemind4.html(remindText);
+					showError(1);
+					var t1 = setInterval(function(){
+						backToLogin();
+						$("#userAccount").val(userAccount_weak);
+						$("#userPassword").val("").blur();
+						clearInterval(t1);
+					},3000);
+				}else{
+					var remindText =data.data.errorMsg;
+					errorTypeRemind4.html(remindText);
+					showError(1);
+					$("#oldpassword_weak").val("");
+					$("#oldpassword_weak").blur();
+					$("#newpassword_weak").val("");
+					$("#newpassword_weak").blur();
+					$("#confimpassword_weak").val("");
+					$("#confimpassword_weak").blur();
+				}
+
+			}
+		});
+   
+}
+
+/**
+ * 重置
+ */
+function cancle(){
+	$("#newpassword").val('').change();
+	$("#confimpassword").val('').change();
+}
+
+/**
+ *密码规则验证
+ */
+function checkPasswordByRule(){
+	var vpassword = $('#newpassword').val();
+	var reChars = /[a-zA-Z]+/i;
+	var reNums = /[0-9]+/i;
+	var reSpecialChars = /[\!\@#$%|^\&\*\(\)\+\|\\|?\/\>\<\.\,]+/i;//验证是否包含了特殊字符
+	if(vpassword.length<7){
+		var remindText ='密码长度必须大于等于7位！';
+		errorTypeRemind3.html(remindText);
+		showError(1);
+		$('#newpassword').focus();
+		return false;
+	}else if(!reChars.test(vpassword)){
+		var remindText ='密码必须包含字母！';
+		errorTypeRemind3.html(remindText);
+		showError(1);
+		$('#newpassword').focus();
+		return false;
+	}else if(!reNums.test(vpassword)){
+		var remindText ='密码必须包含数字！';
+		errorTypeRemind3.html(remindText);
+		showError(1);
+		$('#newpassword').focus();
+		return false;
+	}else if(!reSpecialChars.test(vpassword)){
+		var remindText ='密码必须包含特殊字符！';
+		errorTypeRemind3.html(remindText);
+		showError(1);
+		$('#password').focus();
+		return false;
+	}
+	//判断是否在2年内的密码重复
+	var vuserId = document.getElementById("empId").value;
+	vpassword = vpassword.replace(/\&/g, '￥'); //由于&为参数地址连接符，用"￥"替换"&",然后在还原
+	var returnValue = getPasswordIsRepeat(vuserId, vpassword).replace(/\n|\r/g, "");//判断该用户密码在2年内是否重复，重复返回"1",不重复返回"0
+	returnValue = eval("("+returnValue+")");
+	if (returnValue.result == 1) { //密码在2年内重复
+		var remindText ='密码在2年内不能重复！';
+		errorTypeRemind3.html(remindText);
+		showError(1);
+		return false;
+	}
+	return true;
+}
+
+/**
+ * 根据用户id和密码，判断该密码是否在2年内重复
+ */
+function getPasswordIsRepeat(vuserId, vpassword){
+    return ajaxForSync(whirRootPath + '/ResetPasswordAction!checkPasswordIsRepeat.action', 'userId='+vuserId+'&password='+vpassword);
+}
+//---------------------------找回密码script----------------------------------end//
+
+//---------------------------cocall的整合方法----------------------------------start
+/**
+ * 获取当前登录用户信息
+ */
+function btn_get_account_Click(port) {
+	// 端口可以是12700/12702/12704...以此类推
+	// 本机IP 127.0.0.1有可能以后会用某个域名来代替
+	var getAccountURL = 'http://127.0.0.1:'+port+'/sso_get_account?callback=get_login_account';
+	var el = document.createElement('script');
+	el.async = false;
+	el.src = getAccountURL;
+	el.type = 'text/javascript';
+	(document.getElementsByTagName('HEAD')[0] || document.body).appendChild(el);
+}
+
+/**
+ * 获取当前登录用户的callback
+ */
+function get_login_account(accountList) {
+   var jid="";
+   var cserver="";
+   var uid = "";
+   var username="";
+	// 写入已登录用户的信息的表
+   var misid="OA";
+	   jid = accountList[0].jid;
+	   uid=jid.substring(0,jid.indexOf("@"));
+	   cserver = accountList[0].server;		
+	   cusername=accountList[0].username;
+	   //隐藏域赋值
+	   $("#uid").val(uid);
+	   $("#userAccount").val(cusername);
+	   $("#userPassword").val("111111");
+
+	if(uid!=null && uid!="" && cserver!=null &&  cserver!="" && misid!=null &&  misid!=""){
+	 var portArr2=new Array();
+		 portArr2[0]="12700";
+		 portArr2[1]="12702";
+		 portArr2[2]="12704";
+		 portArr2[3]="12706";
+		 portArr2[4]="12708";
+		for(var i=0;i<portArr2.length;i++){
+			var port2 = portArr2[i];
+			btn_get_token_Click(uid,cserver,misid,port2);
+		}
+	}
+
+}
+
+/**
+ * 获取token
+ */
+function btn_get_token_Click(uid,server,misid,port) {
+	// http://127.0.0.1:12700/sso_get_token?userid=10018&server=172.16.11.126&misid=1234567899999999&callback=get_token
+	var getTokenURL = "http://127.0.0.1:"+port+"/sso_get_token?userid="+uid+"&server="+server+"&misid="+misid+"&callback=get_login_token&random="+Math.random(new Date());
+	var el = document.createElement('script');
+	el.async = false;
+	el.src = getTokenURL;
+	el.type = 'text/javascript';
+	(document.getElementsByTagName('HEAD')[0] || document.body).appendChild(el);
+}
+		
+
+/**
+ * 获取指定用户的token的callback
+ */
+function get_login_token(tokenObject) {
+	 var token = tokenObject.token;			
+	// 显示cocall客户端内置服务器返回的token						
+	//token 隐藏域赋值  提交
+	tokenflag=1;
+	
+	$("#token").val(token);
+	if(token!=null && token!=""){
+		var html="<img class='ui_icon_bg' src='/defaultroot/scripts/plugins/lhgdialog/skins/icons/alert.gif'/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style='font-size:15px'>正在自动登陆中...</span>";
+		submitForm();
+	}
+}
+//---------------------------cocall的整合方法----------------------------------end//
+
+/**
+ * 获取二维码
+ */
+function getLogonQRcode(){
+	$("#sweepResult").val("0");
+		$.ajax({
+		url: "/defaultroot/Logon!getLogonQRcode.action",
+		cache: false,
+		async: true,
+		success: function(dataForm) {
+			var data = eval('('+dataForm+')');
+			if(data.result=="success"){
+				$("#qrimg").attr("src",whirRootPath+"/upload/logon/"+data.data.uuid+".jpg");
+				$("#logonUuid").val(data.data.uuid);
+				var sweepTimes=data.data.sweepTimes;
+				var nowTimes=sweepTimes;
+				var qrcode = setInterval(function(){
+					//二维码生成60s后，如果未成功登录将会被拒绝登录
+					var apartTime=(nowTimes-sweepTimes)/1000;
+					if(apartTime>65){ //考虑代码调用过程的时间，将界面刷新的时间增加5s
+						clearInterval(qrcode);
+						$(".refresh").css("display","block");
+						return false;
+					}
+					//判断是否扫码成功
+					var logonUuid=$("#logonUuid").val();
+					var sweepResult=$("#sweepResult").val();
+					if(sweepResult=='1'){//扫码成功,判断是否可以自动登录
+						$.ajax({
+							url: "/defaultroot/Logon!checkIsSweepLogon.action",
+							cache: false,
+							async: true,
+							data:{"logonUuid":logonUuid},
+							success: function(dataSweepLogonForm) {
+								var dataSweepLogon = eval('('+dataSweepLogonForm+')');
+								nowTimes=dataSweepLogon.data.nowTimes;
+								if(dataSweepLogon.result=="success"){
+									$("#userAccount").val(dataSweepLogon.data.userAccount);
+									$("#sweep_logonTip").hide();
+									$("#sweep_success").show();
+									clearInterval(qrcode);
+									submitForm();
+								}else if(dataSweepLogon.data.userAccount=="-1"){
+									//取消扫码登录
+									$("#sweepResult").val("0");
+									$("#sweep_logonTip").hide();
+									$(".refresh").css("display","block");
+									clearInterval(qrcode);
+								}
+							}
+						});
+					}else{//扫码不成功
+						$.ajax({
+							url: "/defaultroot/Logon!checkSweepResult.action",
+							cache: false,
+							async: true,
+							data:{"logonUuid":logonUuid},
+							success: function(dataSweepResultForm) {
+								var dataSweepResult = eval('('+dataSweepResultForm+')');
+								nowTimes=dataSweepResult.data.nowTimes;
+								if(dataSweepResult.result=="success"){
+									//userPhotoUrl
+									$("#sweep_tip").hide();
+									$(".smtip").hide();
+									$("#qrimg").attr("src",dataSweepResult.data.userPhotoUrl);
+									$("#sweepResult").val("1");
+									$("#sweep_logonTip").show();
+								}
+							}
+						});
+					}
+				},1000);
+			}
+		}
+	});
+}
+</script>

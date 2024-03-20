@@ -70,6 +70,14 @@ if __name__ == "__main__":
         else:
             app = services.app(db, logger)
 
+    if "--webapp" in argv or "-web" in argv:
+        logger.debug("webapp(Dom based) Mode")
+        import webapp
+
+        app = webapp.app(db, logger, method="webapp-Dom-based")
+
+
+
     if "--honeypot" in argv or "-h" in argv:
         logger.debug("HONEYPOT Mode")
         import honeypot

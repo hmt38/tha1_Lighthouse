@@ -1,0 +1,192 @@
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+<title>企业信息系统门户</title>
+<style type="text/css">
+body,input, select { font-family: "Microsoft YaHei", "宋体", "Segoe UI", sans-serif; }
+
+.label { text-align: right; width: 80px; display: inline-block;}
+.input { border: 1px solid #80a0c0; height: 18px; width: 180px; margin-left: 15px; vertical-align: middle;}
+.select { border: 1px solid #80a0c0; width: 183px; margin-left: 15px; vertical-align: middle;}
+
+.btn2 { background: url(images_index/mainbt.jpg) no-repeat; border-width: 0px; width: 104px; color: #464646; line-height: 31px; height: 31px; 
+		font-family:黑体; font-size: 16px;}
+.btn2Off { background-position: 0px 0px;}
+.btn2On { background-position: 0px -31px; color: #0041a3; }
+
+.btn { background: url(images_index/buttonBg.jpg) no-repeat; border-width: 0px; width: 82px; color: #464646; line-height: 23px; height: 23px; 
+		font-size: 13px;}
+.btnOff { background-position: 0px 0px;}
+.btnOn { background-position: 0px -23px;}
+
+.alink {font-size: small; color: blue;}
+
+.maindiv { position:absolute; top:50%; left:50%; margin:-200px 0 0 -318px; width: 637px; height: 400px; border: 1px solid #b0b0b0; background-color: #f0f0f0;}
+.bannerdiv { border-bottom: 1px solid #b0b0b0; height: 131px; background-color: white;}
+.seldiv {text-align: right; padding-right: 12px; margin-top: 12px;} 
+.formdiv { margin: 0 auto; width: 320px; font-size: 11pt; margin-top: 30px;}
+</style>
+<script type="text/javascript">
+var mkbh = "";
+function _onload() {
+	document.getElementById('loginForm').username.focus();
+	if (mkbh == "")
+		mkbh = getCookie("login_mkbh");
+
+ 	if (mkbh != "G1" && mkbh != "G2") {
+		if (mkbh == null || mkbh == "")
+			mkbh = "E5";
+		document.getElementById('loginForm').mkbh.value = mkbh;
+		selectcat("Ent");
+ 	} else {
+		selectcat(mkbh);
+	}
+
+}
+
+function getCookie(NameOfCookie) {    
+	if (document.cookie.length > 0) {    
+		begin = document.cookie.indexOf(NameOfCookie+"=");    
+		if (begin != -1) {    
+			begin += NameOfCookie.length+1;    
+			end = document.cookie.indexOf(";", begin);    
+			if (end == -1) end = document.cookie.length;    
+			return unescape(document.cookie.substring(begin, end));
+		}
+	}
+	return null;
+}    
+
+function btclick() {
+	var form = document.getElementById("loginForm");
+	if (form.username.value.length == 0) {
+		alert("请输入用户名");
+		return;
+	}
+	if ("7304" != form.vericode.value) {
+		alert("校验码错误,请重新输入");
+		form.vericode.focus();
+		return;
+	}
+	dologin();
+}
+
+function _onkeydown(ev) {
+	var ev = window.event ? window.event : ev;
+	if (ev.keyCode == 13) {
+		var obj = window.event ? ev.srcElement : ev.target;
+		var form = document.getElementById("loginForm");
+		if (obj.name == "username") {
+			if (obj.value.length > 0)
+				form.password.focus();
+		} else if (event.srcElement == form.password) {
+			
+				form.vericode.focus();
+				form.vericode.select();
+			
+		} else if (event.srcElement == form.vericode) {
+			btclick();
+		}
+	}
+}
+
+
+function dologin() {
+	var form = document.getElementById("loginForm");
+	var jgbh = "";
+	if (mkbh != "G1" && mkbh != "G2")
+		mkbh = document.getElementById("loginForm").mkbh.value;
+	
+	var mkbhElm = loginframe.document.getElementById("mkbh");
+	if (!mkbhElm) {
+		alert("登录异常，请重新刷新主页");
+	} else {
+		var username = form.username.value;
+		if (mkbh == "G1" || mkbh == "G2") {
+			if (username.indexOf('@') == -1) {
+				if (jgbh.length == 0) {
+					alert("用户名为 登录名@机构编号 的形式，请重新输入用户名");
+					form.username.focus();
+					return;
+				} else {
+					username += "@" + jgbh;
+				}
+			}
+		}
+		mkbhElm.value = mkbh;
+		loginframe.document.getElementById("action").value = "verify";
+		loginframe.document.getElementById("username").value = username;
+		loginframe.document.getElementById("password").value = form.password.value;
+		loginframe.document.loginform.submit();
+	}
+}
+
+function escapeContent(urlContent) {
+	return escape(urlContent).replace(new RegExp("\\+", "gi"), "%2B");
+}
+
+function checkReturn(thePid, errmsg) {
+	if (errmsg.length > 0) {
+		alert(errmsg);
+	} else if (thePid.length > 0) {
+		document.cookie = "login_mkbh=" + mkbh;
+
+		window.location.href = "check.jsp?pid=" + escapeContent(thePid);
+
+	}
+}
+
+function selectcat(cat) {
+	document.getElementById("catEnt").className = "btn2 btn2Off";
+	document.getElementById("catG1").className = "btn2 btn2Off";
+	document.getElementById("catG2").className = "btn2 btn2Off";
+	document.getElementById("cat" + cat).className = "btn2 btn2On";
+	document.getElementById("mkdiv").style.visibility = (cat == "Ent") ? "visible" : "hidden";
+	mkbh = (cat == "Ent") ? document.getElementById("loginForm").mkbh.value : cat;
+}
+</script>
+</head>
+<body onload="_onload()" style="margin: 0 auto; width: 637px;">
+<div class="maindiv">
+	<div class="bannerdiv">
+		<img src="/images_index/mainlogo.jpg" style="position: absolute; top:41px; left:31px; border-width:0px;"/>
+		<img src="/images_index/productKSOA.jpg" style="position: absolute; top:33px; left:365px; border-width:0px;"/>
+		<span style="position: absolute; left: 550px; top: 68px; font-family: Arial Black; color:#C00040; font-size: 24px; letter-spacing: 2px">V9.0</span>
+	</div>
+	<div class="seldiv">
+		<button id="catEnt" class="btn2 btn2Off" tabindex="-1" onclick="selectcat('Ent')">企业门户</button><button id="catG1" class="btn2 btn2Off" tabindex="-1" onclick="selectcat('G1')">供应商协同</button><button id="catG2" class="btn2 btn2Off" tabindex="-1" onclick="selectcat('G2')">客户协同</button>
+	</div>
+	
+	<div class="formdiv">
+		<form id="loginForm" method="post" action="#">
+			<div id="mkdiv">
+				<span class="label">子系统:</span><select class="select" name="mkbh" size="1" tabindex="1">
+	<option value="A1">供应链管理系统</option>
+	
+				</select>
+			</div>
+			<div style="margin-top: 10px;">
+				<span class="label">用户名:</span><input name="username" type="text" class="input" tabindex="2" onmouseover="this.style.borderColor='#99e300'" onmouseout="this.style.borderColor='#80a0c0'" onkeydown="_onkeydown(event)" value=""/>
+			</div>
+			<div style="margin-top: 10px;">
+				<span class="label">密码:</span><input name="password" type="password" class="input" tabindex="3" onmouseover="this.style.borderColor='#99e300'" onmouseout="this.style.borderColor='#80a0c0'" onkeydown="_onkeydown(event)" value=""/>
+			</div>
+			<div style="margin-top: 10px; vertical-align: middle;">
+				<span class="label">校验码:</span><input name="vericode" type="text" class="input" tabindex="4" onmouseover="this.style.borderColor='#99e300'" onmouseout="this.style.borderColor='#80a0c0'" style="width: 117px; " onkeydown="_onkeydown(event)" value="" />
+				<img src="/servlet/com.sksoft.v8.cb.RandomImageGenerator?random=7304"  style="border-width: 0; width:60px; height:22px; vertical-align:middle;"/>
+			</div>
+			<div style="text-align: center; margin-top: 20px;">
+				<input class="btn btnOff" onmouseover="this.className='btn btnOn'" tabindex="5" onmouseout="this.className='btn btnOff'" type="button" value="登录" onclick="btclick('')"/>
+			</div>
+		</form>
+	</div>
+</div>
+<iframe id="loginframe" src="innerlogin.jsp" style="display:none"></iframe>
+</body>
+</html>

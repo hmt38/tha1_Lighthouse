@@ -255,7 +255,7 @@ class app:
 
         ip_list = []
         ip_list = self.db.get_all_ip()
-        # print(ip_list)
+        print(ip_list)
 
         # 尝试解包API库
         try:
@@ -338,10 +338,10 @@ class app:
 
         flag = 0
         for ip in ip_list:
-            # ip = "159.65.92.104"
-            # 根据主办方要求缩小范围
-            if not default.ip_in_list(ip):
-                continue
+            # # ip = "159.65.92.104"
+            # # 根据主办方要求缩小范围
+            # if not default.ip_in_list(ip):
+            #     continue
 
             service = self.db.get_service_from_ip(ip)
             service = self.manage_service(service)

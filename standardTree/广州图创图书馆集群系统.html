@@ -1,0 +1,192 @@
+
+
+
+
+<html>
+<head>
+<title>系统登陆</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<META content="MSHTML 5.00.2920.0" name=GENERATOR>
+<LINK href="style/logincss.css" rel=stylesheet type=text/css>
+<SCRIPT src="./javascript/md5.js"></SCRIPT>
+</head>
+
+
+<SCRIPT language=javascript>
+<!--
+var isCanUse=false;
+function loginFormSubmit()
+{
+	if(!isCanUse){
+		alert("该版本不能使用，请与开发商联系！");
+		return;
+	}
+	if(document.loginForm.loginid.value=="")
+	{
+		alert("请输入用户名!"); 
+		document.loginForm.loginid.focus();
+		return;
+	}
+	if(document.loginForm.sw.value=="")
+	{
+		alert("请输入密码!");
+		document.loginForm.sw.focus();
+		return;
+	}
+	if((document.loginForm.sw.value.indexOf("'")!=-1)||(document.loginForm.sw.value.indexOf("'")!=-1))
+	{
+		alert("密码必须是字母数字或下划线!");
+		document.loginForm.sw.focus();
+		return;
+	}
+	//if(document.loginForm.libcode.value=="")
+	//{
+	//	alert("请输入分馆代码!");
+	//	document.loginForm.libcode.focus();
+	//	return;
+	//}
+	var tmp=hex_md5(document.loginForm.sw.value);
+	//document.loginForm.loginid.value=document.loginForm.loginid.value.toUpperCase();
+	////alert(document.loginForm.loginid.value);
+	document.loginForm.sw.value="*************";//保护密码明文哦
+	//document.loginForm.submit();
+	var url="../common/Login?cmdACT=opLOGIN&loginid="+document.loginForm.loginid.value+"&askm="+tmp+"&furl=maxMain.jsp";
+	window.location.href=url;
+}
+
+var browserName=navigator.appName;
+var versionStr=new String(navigator.appVersion);
+versionStr=versionStr.substring(versionStr.indexOf("MSIE")+5);
+versionStr=versionStr.substring(0,versionStr.indexOf(";"));
+var browserVersion=versionStr;
+//document.write("Your browser is ",browserName," " ,browserVersion,".");
+if(parseFloat(versionStr)<5.5)
+	alert("正常操作本软件，请使用IE6.0以上浏览器版本!");
+//document.write("Your browser is ",browserName," " ,browserVersion,".");
+function init(code){
+	var messageStr='1';
+	if(code!=1)
+		isCanUse=true;
+	if(code==1||code==2){
+		if(messageStr!="1")
+			alert(messageStr);
+	}
+	var ServerTime=1706778841328;
+	var ClientTime=new Date();
+	//alert(ServerTime+"||"+ClientTime.getTime());
+	//时间差的毫秒数。
+	
+	var millisDiffer=Math.abs(ClientTime.getTime()-ServerTime);
+	if(millisDiffer/(1*1000*60*60)>1){//相差一小时就提示吧
+		var serverDate=new Date(ServerTime);
+		alert(" 服务器时间："+serverDate.getFullYear()+"年"+(serverDate.getMonth()+1)+"月"+serverDate.getDate()+"日"+serverDate.getHours()+"时"+serverDate.getMinutes()+"分"+serverDate.getSeconds()+"秒"
+				+"\n 本机器时间："+ClientTime.getFullYear()+"年"+(ClientTime.getMonth()+1)+"月"+ClientTime.getDate()+"日"+ClientTime.getHours()+"时"+ClientTime.getMinutes()+"分"+ClientTime.getSeconds()+"秒"
+				+"\n\n您的机器时间与服务器时间相差太大，请调整您的机器时间！");
+		//这里先屏蔽掉，好像提示有问题。
+	}
+	document.forms[0].loginid.focus();
+}
+-->
+
+</SCRIPT>
+<style>
+.lred {
+	FONT-SIZE: 14px; COLOR: #ff0000; FONT-FAMILY: Verdana,宋体,simsun
+}
+.lblue {
+	FONT-SIZE: 14px; COLOR: #0000ff; FONT-FAMILY: Verdana,宋体,simsun
+}
+.lwhite {
+	FONT-SIZE: 14px; COLOR: #ffffff; FONT-FAMILY: Verdana,宋体,simsun
+}
+.lyellow {
+	FONT-SIZE: 14px; COLOR: #ffff00; FONT-FAMILY: Verdana,宋体,simsun
+}
+.lgreen {
+	FONT-SIZE: 14px; COLOR: #008200; FONT-FAMILY: Verdana,宋体,simsun
+}
+.lgray {
+	FONT-SIZE: 14px; COLOR: #666666; FONT-FAMILY: Verdana,宋体,simsun
+}
+.table11 {
+      	 border:#ffffff solid;border-width:1 0 0 1;
+}
+.td11    {
+        FONT-WEIGHT: normal;border:#ffffff solid;border-width:0 1 1 0
+}
+P {
+	MARGIN-TOP: 0.3em; MARGIN-BOTTOM: 0.3em; LINE-HEIGHT: 130%
+}
+
+</style>
+<noscript><body bgColor=#336699  onload="document.forms[0].loginid.focus();">
+	请注意,您的浏览器不能访问JavaScript,将不能正常使用本系统!!
+</noscript>
+<body bgColor=#336699 leftMargin=0 rightMargin=0 onload="javascript:init(0);">
+<center>
+
+<form name=loginForm action="Login" method="post">
+<INPUT TYPE=hidden name=cmdACT 	value="opLOGIN">
+<INPUT TYPE=hidden name=furl 	value="maxMain.jsp">
+<INPUT TYPE=hidden name="askm" value="">
+<INPUT TYPE=hidden name=competno value="999libcodeadmin">
+<TABLE width="100%" border=0 cellPadding=0 cellSpacing=0 >
+  <TBODY>
+  <TR>
+    <TD colSpan=2 height=24>&nbsp;&nbsp;&nbsp;</TD></TR>
+  <TR>
+    <TD height=24>&nbsp; </TD>
+    <TD></TD></TR>
+  <TR>
+    <TD style="BORDER-TOP: #87b3d0 1px solid" noWrap colSpan=2 height=40>&nbsp;</TD>
+  </TR>
+  </TBODY>
+  </TABLE>
+<table class="table11" cellPadding="0" cellSpacing="0" border=0>
+<tr>
+<td class="td11" >
+<TABLE height=296 cellSpacing=0 cellPadding=0 width=431 align=center background="img/maxLogin.jpg" border=0>
+<TBODY>
+<TR height=210>
+<TD  colSpan=2 height=210>&nbsp;</TD></TR>
+<TR height=86>
+<TD vAlign=top width=120 >&nbsp; </TD>
+    <TD>
+      <SPAN class=swhite>
+      <P><font color="#FFFFFF">用户名：</font><input class=unnamed5 maxlength=20 name=loginid size=12 type=text tabindex="10" onkeypress="javascript:if(event.keyCode==13)sw.focus();">
+      <INPUT class=unnamed5 name=login type=button value=" 登 录 " tabindex="30" onclick="javascript:loginFormSubmit();">
+      </P>
+      <P><font color="#FFFFFF">密　码：</font><input class=unnamed5 maxlength=20 name=sw size=12 type=password tabindex="20" onkeypress="javascript:if(event.keyCode==13)login.focus();">
+      <input class=unnamed5 type=reset value=" 重 写 " name="reset" tabindex="40">
+      </P>    
+      </SPAN>
+     </TD>
+</TR>
+</TBODY>
+</TABLE>
+</td>
+</tr>
+<TABLE width="100%" border=0 cellPadding=0 cellSpacing=0 >
+  <TBODY>
+  <TR>
+    <TD colSpan=2 height=24>&nbsp;&nbsp;&nbsp;</TD></TR>
+  <TR>
+    <TD height=24>&nbsp; </TD>
+    <TD></TD>
+  </TR>
+  <TR>
+    <TD align="center" colspan="2" style="BORDER-TOP: #87b3d0 1px solid" noWrap height=20>
+    <FONT color="#FFFFFF">
+    <A style="CURSOR:HAND" onClick="this.style.behavior='url(#default#homepage)';this.setHomePage(self.location.href)">设置为首页</A>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+    <b>3RD Auto System Interlib(V 2.0.1 #20140404 package:2017-08-10)</b>广州图创计算机软件开发有限公司 Copyright. 2003 All Rights Reserved 。
+    </FONT> </TD>
+  </TR>
+  </TBODY>
+ </TABLE>
+
+</table>
+</form>
+</center>
+</body>
+
+</html>

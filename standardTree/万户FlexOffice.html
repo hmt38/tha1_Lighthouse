@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta http-equiv="Cache-Control" content="no-store" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	<link rel="stylesheet" href="../../fui/css/login_all.min.css">
+	<link href="./../../modules/login/css/login_all.css?v=4.4" rel="stylesheet"/>
+	<title>自主安全协同办公系统</title>
+</head>
+
+<body>
+
+	<div class="flexbase" id="container">
+		<div id="bodyBox">
+			<div id="bodyPage"></div>
+		</div>
+		<!-- header -->
+		<div id="wh-header" class="wh-header">
+			<div class="wh-container clearfix">
+				<div id="wh-logo" class="wh-logo logo">
+					<img class="hide" src="" alt=""/>
+					<span class="front-title hide i18n" data-i18n-key='oa.login.title'
+						data-i18n-ptype="html">自主安全协同办公系统</span>
+                </div>
+			</div>
+			<div class="wh-head-right hide">
+				<div class="wh-right-controls ukey-btn btn-round" style="display: none;">
+					<i class="iconfont icon-ukey"></i>
+					<!-- <div class="foot-theme">
+						ukey登录
+					</div> -->
+				</div>
+				<div class="wh-right-language language-select btn-round">
+					<span class="name">中</span>
+					<div class="language-select-hover"></div>
+					<ul class="language-select-list">
+						<li value="zh-cn" name="中">简体中文</li>
+						<li value="en_US" name="En">English</li>
+					</ul>
+				</div>
+				<div class="wh-right-controls controls hide btn-round">
+					<i class="iconfont icon-xiazai"></i>
+				</div>
+				<div class="wh-right-theme help hide btn-round">
+					<i class="iconfont icon-help"></i>
+				</div>
+			</div>
+		</div>
+		<!--main-->
+		<div class="wh-body">
+			<div class="wh-container wh-body-main">
+				<div class="wh-login-well wh-login-type-center current hide">
+					<div class="wh-login-type-toggle left hide">
+						<i class="wh-code-login wh-login-toggle qrcode"></i>
+						<i class="wh-pwd-login wh-login-toggle hide"></i>
+                    </div>
+					<!-- 白底磨砂显示的切换样式 -->
+					<div class="wh-login-type-toggle right hide">
+						<div class="scale wh-login-toggle qrcode"><i class="iconfont icon-a-erweimaban"></i></div>
+						<div class="scale wh-login-toggle hide"><i class="iconfont icon-diannaoquejiao"></i></div>
+					</div>
+                    <div class="wh-login-box wh-code-box">
+                        <div class="wh-avatar-login hide">
+							<div class="wh-login-form-logo logo">
+								<img class="hide" src="" alt="" style="max-width: 100%;max-height: 90px;">
+								<div class="front-title i18n hide" data-i18n-key="oa.login.title" data-i18n-ptype="html">值得信赖的智慧政务办公专家</div>
+							</div>
+                            <div class="avatar-body single-login">
+                                <div class="avatar-msg">点击头像直接登录</div>
+								<div class="form-msg"></div>
+                                <!-- <div class="avatar-img"><div class="loading hide"></div><img src="./../../modules/login/images/unknow.png"/></div> -->
+                                <div class="avatar-img"><div class="loading hide"></div><img src="./../../fui/images/login/unknow.png"/></div>
+                                <p class="name">xxx</p>
+                            </div>
+							<button type="button" class="wh-login-sbtn">登 录</button>
+							<div class="change hover-333">切换账号</div>
+                            <div class="form-group">
+                                <label class="avatar-check-label pr unchecked">
+                                    <input type="checkbox" name="autologin" onchange="autologin(this)">
+                                    <span class="iconfont icon-check"><i class="iconfont icon-checked"></i></span>
+                                    <span class="rember-psw">下次自动登录</span>
+                                </label>
+                                <div class="forget-password">
+                                    <span class="wh-avatar-login-btn" type="button">账号密码登录</span>
+                                </div>
+                                <div style="clear: both"></div>
+                            </div>
+                        </div>
+						<form action="" class="wh-login-form logonForm" method="post" onsubmit="return false;" novalidate>
+							<div class="wh-login-account">
+								<div class="wh-login-form-title">
+									<h2 class="wh-login-type i18n " data-i18n-key='oa.login.account.title' data-i18n-ptype="html">账号登录</h2>
+									<div class="wh-login-line wh-login-bglinear"></div>
+								</div>
+								<div class="wh-login-form-logo logo">
+									<img class="hide" src="" alt="" style="max-width: 100%;max-height: 90px;">
+									<div class="front-title i18n hide" data-i18n-key="oa.login.title" data-i18n-ptype="html">值得信赖的智慧政务办公专家</div>
+								</div>
+								<div class="form-msg"></div>
+								<div class="form-group first" style="margin-top: 10px;">
+									<input type="text" class="form-type-transparent i18n" name="username" maxlength="100" placeholder="登录名" data-i18n-key="oa.login.name" autofocus="autofocus" data-i18n-ptype="placeholder">
+									<input type="hidden">
+									<div class="input-label">账号</div>
+									<span class="iconfont icon-user wh-right-line"></span>
+								</div>
+								<div class="form-group wh-login-pws-group">
+									<input type="password" class="form-type-transparent i18n" name="password" autocomplete="off" placeholder="密码" data-i18n-key="oa.login.password" data-write="0" data-i18n-ptype="placeholder" oninput="changePws(this)">
+									<input type="hidden" name="encryptPassword">
+									<i class="iconfont icon-eye-close pwd-eye hide" onclick="changePwsShow(this)"></i>
+									<i class="iconfont icon-clear hide" onclick="clearPws(this)"></i>
+									<div class="input-label">密码</div>
+									<span class="iconfont icon-pwd2 wh-right-line"></span>
+								</div>
+							</div>
+							<div class="wh-login-sms hide">
+								<div class="wh-login-sms-title">
+									<div class="title">短信快捷登录</div>
+									<div class="wh-login-sms-btn acc"><span>账号密码登录</span><span>></span></div>
+								</div>
+								<div class="form-msg"></div>
+								<div class="form-group first">
+									<input type="text" class="form-type-transparent i18n" name="telephone" maxlength="20" autocomplete="off" placeholder="手机号">
+									<div class="input-label">手机号</div>
+									<span class="iconfont icon-phone-iphone wh-right-line"></span>
+								</div>
+								<div class="form-group wh-login-smsno-group">
+									<input type="password" class="form-type-transparent i18n" name="smsNo" autocomplete="off" placeholder="动态密码">
+									<div class="input-label">动态密码</div>
+									<span class="iconfont icon-pwd2 wh-right-line"></span>
+									<span class="wh-login-getsms">获取动态密码</span>
+								</div>
+							</div>
+							<div class="form-group form-group-validate">
+								<input type="text" placeholder="验证码" class="form-type-transparent validate i18n" name="captcha" data-i18n-ptype="placeholder" data-i18n-key="oa.login.captcha">
+								<div class="input-label">验证码</div>
+								<span class="iconfont icon-validate wh-right-line"></span>
+								<a href="#" class="verify-vcode i18n" title="看不清，换一张" data-i18n-ptype="title" data-i18n-key="oa.login.captcha.show">
+									<img name="jcaptcha" src="" alt="验证码" class="i18n" data-i18n-ptype="alt" data-i18n-key="oa.login.captcha"/>
+								</a>
+							</div>
+							<div class="form-group form-group-drag left">
+								<!-- <input type="hidden" name="dragCaptcha"> -->
+								<div class="drag-driver"><i class="iconfont icon-youshuangjiantou"></i></div>
+								<div class="drag-success"></div>
+								<div class="drag-msg">向右滑动验证</div>
+							</div>
+							<div class="form-group last wh-login-account">
+								<label class="check-label pr">
+									<input type="checkbox" name="rememberMe" checked="checked" onchange="changeRePass(this)">
+									<span class="iconfont icon-check"><i class="iconfont icon-checked"></i></span>
+									<span class="rember-psw i18n hover-333" data-i18n-key="oa.login.remeber" data-i18n-ptype="html">记住密码</span>
+								</label>
+								<div class="forget-password">
+									<span class="pwd-reset i18n hover-333" data-i18n-key="oa.login.forget" data-i18n-ptype="html" type="button" onclick="pwdReset('.wh-login-type-center');">忘记密码</span>
+								</div>
+								<div style="clear: both"></div>
+							</div>
+							<button type="submit" class="wh-login-sbtn i18n wh-login-bgcolor" data-i18n-key="oa.login.button" data-i18n-ptype="html">登 录</button>
+							<div class="wh-login-sms-btn hide">短信快捷登录</div>
+						</form>
+					</div>
+					<div class="wh-login-box wh-pwd-box opacity-hide">
+						<div class="wh-login-tdCode">
+							<h2 class="wh-login-type i18n" data-i18n-key="oa.login.qrcode.tilte" data-i18n-ptype="html">二维码登录</h2>
+							<div class="wh-login-img">
+								<div class="wh-eCode-img"></div>
+								<div class="wh-login-refreshBg"></div>
+								<div class="wh-login-refresh">
+									<h5 class="i18n" data-i18n-key="oa.login.qrcode.expire" data-i18n-ptype="html">二维码已失效</h5>
+									<button type="button" value="刷新" class="i18n wh-login-bgcolor" data-i18n-key="oa.login.qrcode.refresh" data-i18n-ptype="html">点击刷新</button>
+								</div>
+							</div>
+							<p class="scanning-text-white">请打开移动办公客户端点开右上角“扫一扫”</p>
+							<p class="scanning-text i18n" data-i18n-key="oa.login.qrcode.note" data-i18n-ptype="html">请使用移动平台扫码功能，安全登录</p>
+							<div class="login-scan-opts">
+								<div class="change cursor-pointer hover-333">密码登录</div>
+								<div class="line hideflag">|</div>
+								<div class="hideflag cursor-pointer hover-333" onclick="pwdReset('.wh-login-type-right');">忘记密码</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!--  显示在底部 -->
+				<div class="wh-login-type-bottom hide">
+					<div class="wh-login-well in-center">
+						<div class="wh-login-type-toggle left">
+							<i class="wh-pwd-login wh-login-toggle"></i>
+						</div>
+						<!-- 白底磨砂显示的切换样式 -->
+						<div class="wh-login-type-toggle right">
+							<div class="scale wh-login-toggle"><i class="iconfont icon-diannaoquejiao"></i></div>
+						</div>
+						<div class="wh-login-box">
+							<div class="wh-login-tdCode">
+								<h2 class="wh-login-type i18n" data-i18n-key="oa.login.qrcode.tilte" data-i18n-ptype="html">二维码登录</h2>
+								<div class="wh-login-img">
+									<div class="wh-eCode-img"></div>
+									<div class="wh-login-refreshBg"></div>
+									<div class="wh-login-refresh">
+										<h5 class="i18n" data-i18n-key="oa.login.qrcode.expire" data-i18n-ptype="html">二维码已失效</h5>
+										<button type="button" value="刷新" class="i18n wh-login-bgcolor" data-i18n-key="oa.login.qrcode.refresh" data-i18n-ptype="html">点击刷新</button>
+									</div>
+								</div>
+								<p class="scanning-text-white">请打开移动办公客户端点开右上角“扫一扫”</p>
+								<p class="scanning-text i18n" data-i18n-key="oa.login.qrcode.note" data-i18n-ptype="html">请使用移动平台扫码功能，安全登录</p>
+								<div class="login-scan-opts">
+									<div class="change cursor-pointer hover-333">密码登录</div>
+									<div class="line hideflag">|</div>
+									<div class="hideflag cursor-pointer hover-333" onclick="pwdReset('.wh-login-type-right');">忘记密码</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<form action="" class="wh-login-form logonForm" method="post" onsubmit="return false;" novalidate>
+						<div class="form-msg form-msg-code"></div>
+						<div class="wh-login-type-bottom-form">
+							<div class="wh-after-triangle inline-block">
+								<div class="wh-login-bottom-form">
+									<div class="wh-login-account">
+										<div class="form-group ie-before-shadow">
+											<input type="text" class="form-type-bottom i18n" name="username" maxlength="100" placeholder="登录名" data-i18n-key="oa.login.name" autofocus="autofocus" data-i18n-ptype="placeholder">
+											<div class="input-label">账号</div>
+											<span class="iconfont icon-user"></span>
+										</div>
+										<div class="form-group wh-login-pws-group ie-before-shadow">
+											<span class="wh-before-triangle1"></span>
+											<span class="wh-before-triangle2"></span>
+											<input type="password" class="form-type-bottom i18n" name="password" autocomplete="off" placeholder="密码" data-i18n-key="oa.login.password" data-write="0" data-i18n-ptype="placeholder" oninput="changePws(this)">
+											<input type="hidden" name="encryptPassword">
+											<i class="iconfont icon-eye-close pwd-eye hide" onclick="changePwsShow(this)"></i>
+											<i class="iconfont icon-clear hide" onclick="clearPws(this)"></i>
+											<div class="input-label">密码</div>
+											<span class="iconfont icon-pwd2"></span>
+										</div>
+									</div>
+									<div class="wh-login-sms hide">
+										<div class="wh-login-sms-title">
+											<div class="wh-login-sms-btn acc"><span><</span><span>账号密码登录</span></div>
+										</div>
+										<div class="form-group ie-before-shadow">
+											<input type="text" class="form-type-bottom i18n" name="telephone" maxlength="20" placeholder="手机号" autofocus="autofocus">
+											<div class="input-label">手机号</div>
+											<span class="iconfont icon-phone-iphone"></span>
+										</div>
+										<div class="form-group wh-login-pws-group ie-before-shadow">
+											<span class="wh-before-triangle1"></span>
+											<span class="wh-before-triangle2"></span>
+											<input type="password" class="form-type-bottom i18n" name="smsNo" autocomplete="off" placeholder="动态密码">
+											<div class="input-label">动态密码</div>
+											<span class="iconfont icon-pwd2"></span>
+											<span class="wh-login-getsms">获取动态密码</span>
+										</div>
+									</div>
+									<div class="form-group form-group-validate">
+										<span class="wh-before-triangle1"></span>
+										<span class="wh-before-triangle2"></span>
+										<input type="text" placeholder="验证码" class="form-type-bottom validate i18n" name="captcha" data-i18n-ptype="placeholder" data-i18n-key="oa.login.captcha">
+										<div class="input-label">验证码</div>
+										<span class="iconfont icon-validate"></span>
+										<a href="#" class="verify-vcode i18n" title="看不清，换一张" data-i18n-ptype="title" data-i18n-key="oa.login.captcha.show">
+											<img name="jcaptcha" src="" alt="验证码" class="i18n" data-i18n-ptype="alt" data-i18n-key="oa.login.captcha"/>
+										</a>
+									</div>
+									<div class="form-group form-group-drag left">
+										<!-- <input type="hidden" name="dragCaptcha"> -->
+										<div class="drag-driver"><i class="iconfont icon-youshuangjiantou"></i></div>
+										<div class="drag-success"></div>
+										<div class="drag-msg">向右滑动验证</div>
+									</div>
+									<button type="submit" class="wh-login-sbtn i18n wh-login-bgcolor" data-i18n-key="oa.login.button" data-i18n-ptype="html">登录</button>
+									<div class="bottom-code-pws code-icon login-scan-code hide"><i class="iconfont icon-erweima"></i></div>
+									<div class="wh-login-sms-btn hide">短信快捷登录</div>
+								</div>
+								<div class="wh-login-bottom-psw">
+									<div class="bottom-rember-psw">
+										<label class="check-label pr">
+											<input type="checkbox" name="rememberMe" checked="checked" onchange="changeRePass(this)">
+											<span class="iconfont icon-check">
+												<i class="iconfont icon-checked"></i>
+											</span>
+											<span class="rember-psw i18n" data-i18n-key="oa.login.remeber" data-i18n-ptype="html">记住密码</span>
+										</label>
+									</div>
+									<div class="bottom-forget-pws">
+										<span class="login-forget-pws i18n" data-i18n-key="oa.login.forget" data-i18n-ptype="html" type="button" onclick="pwdReset('.wh-login-type-bottom');">忘记密码</span>
+									</div>
+									<div class="bottom-code-pws hide">
+										<span class="login-scan-code">
+											<i class="iconfont icon-code"></i>
+											<span class="i18n" data-i18n-key="oa.login.qrcode" data-i18n-ptype="text">扫码登录</span>
+										</span>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</form>
+				</div>
+				<!--  显示在右侧 -->
+				<div class="wh-login-type-right hide">
+					<div class="wh-login-type-toggle left hide">
+						<i class="wh-code-login wh-login-toggle qrcode"></i>
+						<i class="wh-pwd-login wh-login-toggle hide"></i>
+					</div>
+					<!-- 白底磨砂显示的切换样式 -->
+					<div class="wh-login-type-toggle right hide">
+						<div class="scale wh-login-toggle qrcode"><i class="iconfont icon-a-erweimaban"></i></div>
+						<div class="scale wh-login-toggle hide"><i class="iconfont icon-diannaoquejiao"></i></div>
+					</div>
+                    <div class="wh-login-box wh-code-box">
+                        <div class="wh-avatar-login hide">
+                            <div class="wh-login-form-title">
+								<h2 class="wh-login-type i18n " data-i18n-key='oa.login.account.title' data-i18n-ptype="html">账号登录</h2>
+								<div class="wh-login-line wh-login-bglinear"></div>
+							</div>
+							<div class="wh-login-form-logo logo">
+								<img class="hide" src="" alt="" style="max-width: 100%;max-height: 90px;">
+								<div class="front-title i18n hide" data-i18n-key="oa.login.title" data-i18n-ptype="html">值得信赖的智慧政务办公专家</div>
+							</div>
+                            <div class="avatar-body single-login">
+								<div class="avatar-msg">点击头像直接登录</div>
+								<div class="form-msg"></div>
+                                <div class="avatar-img"><div class="loading hide"></div><img src="./../../fui/images/login/unknow.png"/></div>
+                                <p class="name">xxx</p>
+                            </div>
+							<button type="button" class="wh-login-sbtn wh-login-bgcolor">登 录</button>
+							<div class="change hover-333">切换账号</div>
+                            <div class="form-group">
+                                <label class="avatar-check-label pr unchecked">
+                                    <input type="checkbox" name="autologin" onchange="autologin(this)">
+                                    <span class="iconfont icon-check"><i class="iconfont icon-checked"></i></span>
+                                    <span class="rember-psw">下次自动登录</span>
+                                </label>
+                                <div class="forget-password">
+                                    <span class="wh-avatar-login-btn" type="button">账号密码登录</span>
+                                </div>
+                                <div style="clear: both"></div>
+                            </div>
+                        </div>
+						<form action="" class="wh-login-form logonForm" method="post" onsubmit="return false;" novalidate>
+							<div class="wh-login-account">
+								<div class="wh-login-form-title">
+									<h2 class="wh-login-type i18n " data-i18n-key='oa.login.account.title' data-i18n-ptype="html">账号登录</h2>
+									<div class="wh-login-line wh-login-bglinear"></div>
+								</div>
+								<!-- 白底磨砂显示的logo -->
+								<div class="wh-login-form-logo logo">
+									<img class="hide" src="" alt="">
+									<div class="front-title i18n hide" data-i18n-key="oa.login.title" data-i18n-ptype="html">值得信赖的智慧政务办公专家</div>
+								</div>
+								<div class="form-msg"></div>
+								<div class="form-group first"> 
+									<input type="text" class="form-type-transparent i18n" name="username" maxlength="100" placeholder="登录名" data-i18n-key="oa.login.name" autofocus="autofocus" data-i18n-ptype="placeholder">
+									<input type="hidden">
+									<div class="input-label">账号</div>
+									<span class="iconfont icon-user wh-right-line"></span>
+								</div>
+								<div class="form-group wh-login-pws-group">
+									<input type="password" class="form-type-transparent i18n" name="password" autocomplete="off" placeholder="密码" data-i18n-key="oa.login.password" data-write="0" data-i18n-ptype="placeholder" oninput="changePws(this)">
+									<input type="hidden" name="encryptPassword">
+									<i class="iconfont icon-eye-close pwd-eye hide" onclick="changePwsShow(this)"></i>
+									<i class="iconfont icon-clear hide" onclick="clearPws(this)"></i>
+									<div class="input-label">密码</div>
+									<span class="iconfont icon-pwd2 wh-right-line"></span>
+								</div>
+							</div>
+							<div class="wh-login-sms hide">
+								<div class="wh-login-sms-title">
+									<div class="title">短信快捷登录</div>
+									<div class="wh-login-sms-btn acc"><span>账号密码登录</span><span>></span></div>
+								</div>
+								<div class="form-msg"></div>
+								<div class="form-group first">
+									<input type="text" class="form-type-transparent i18n" name="telephone" maxlength="20" autocomplete="off" placeholder="手机号">
+									<div class="input-label">手机号</div>
+									<span class="iconfont icon-phone-iphone wh-right-line"></span>
+								</div>
+								<div class="form-group wh-login-smsno-group">
+									<input type="password" class="form-type-transparent i18n" name="smsNo" autocomplete="off" placeholder="动态密码">
+									<div class="input-label">动态密码</div>
+									<span class="iconfont icon-pwd2 wh-right-line"></span>
+									<span class="wh-login-getsms">获取动态密码</span>
+								</div>
+							</div>
+							<div class="form-group form-group-validate">
+								<input type="text" placeholder="验证码" class="form-type-transparent validate i18n" name="captcha" data-i18n-ptype="placeholder" data-i18n-key="oa.login.captcha">
+								<div class="input-label">验证码</div>
+								<span class="iconfont icon-validate wh-right-line"></span>
+								<a href="#" class="verify-vcode i18n" title="看不清，换一张" data-i18n-ptype="title" data-i18n-key="oa.login.captcha.show">
+									<img name="jcaptcha" src="" alt="验证码" class="i18n" data-i18n-ptype="alt" data-i18n-key="oa.login.captcha"/>
+								</a>
+							</div>
+							<div class="form-group form-group-drag left">
+								<!-- <input type="hidden" name="dragCaptcha"> -->
+								<div class="drag-driver"><i class="iconfont icon-youshuangjiantou"></i></div>
+								<div class="drag-success"></div>
+								<div class="drag-msg">向右滑动验证</div>
+							</div>
+							<div class="form-group last wh-login-account">
+								<label class="check-label pr">
+									<input type="checkbox" name="rememberMe" checked="checked" onchange="changeRePass(this)">
+									<span class="iconfont icon-check"><i class="iconfont icon-checked"></i></span>
+									<span class="rember-psw i18n hover-333" data-i18n-key="oa.login.remeber" data-i18n-ptype="html">记住密码</span>
+								</label>
+								<div class="forget-password">
+									<span class="pwd-reset i18n hover-333" data-i18n-key="oa.login.forget" data-i18n-ptype="html" type="button" onclick="pwdReset('.wh-login-type-right');">忘记密码</span>
+								</div>
+								<div style="clear: both"></div>
+							</div>
+							<button type="submit" class="wh-login-sbtn i18n wh-login-bgcolor" data-i18n-key="oa.login.button" data-i18n-ptype="html">登录</button>
+							<div class="wh-login-sms-btn hide">短信快捷登录</div>
+						</form>
+					</div>
+					<div class="wh-login-box wh-pwd-box opacity-hide">
+						<div class="wh-login-tdCode">
+							<h2 class="wh-login-type i18n" data-i18n-key="oa.login.qrcode.tilte" data-i18n-ptype="html">二维码登录</h2>
+							<div class="wh-login-img">
+								<div class="wh-eCode-img"></div>
+								<div class="wh-login-refreshBg"></div>
+								<div class="wh-login-refresh">
+									<h5 class="i18n" data-i18n-key="oa.login.qrcode.expire" data-i18n-ptype="html">二维码已失效</h5>
+									<button type="button" value="刷新" class="i18n wh-login-bgcolor" data-i18n-key="oa.login.qrcode.refresh" data-i18n-ptype="html">点击刷新</button>
+								</div>
+							</div>
+							<p class="scanning-text-white">请打开移动办公客户端点开右上角“扫一扫”</p>
+							<p class="scanning-text i18n" data-i18n-key="oa.login.qrcode.note" data-i18n-ptype="html">请使用移动平台扫码功能，安全登录</p>
+							<div class="login-scan-opts">
+								<div class="change cursor-pointer hover-333">密码登录</div>
+								<div class="line hideflag">|</div>
+								<div class="hideflag cursor-pointer hover-333" onclick="pwdReset('.wh-login-type-right');">忘记密码</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--footer-->
+		<div id="wh-footer" class="wh-footer">
+			<div class="wh-container hide" id="copyRight">
+				<p class="wh-footer-text text-center">
+					<span>万户网络©1998-2022 All Rights Reserved.</span>
+				</p>
+			</div>
+			<div class="wh-foot-right">
+				<div class="wh-right-controls ukey-btn hide btn-round">
+					<i class="iconfont icon-ukey"></i>
+					<!-- ukey登录 -->
+				</div>
+				<div class="wh-right-language language-select btn-round">
+					<span class="name">中</span>
+					<div class="language-select-hover"></div>
+					<ul class="language-select-list">
+						<li value="zh-cn" name="中">简体中文</li>
+						<li value="en_US" name="En">English</li>
+					</ul>
+				</div>
+				<div class="wh-right-controls controls hide btn-round">
+					<i class="iconfont icon-xiazai"></i>
+				</div>
+				<div class="wh-right-theme help hide btn-round">
+					<i class="iconfont icon-help"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<!-- <script src="./../../fui/js/jquery.1.11.3.min.js?v=4.4"></script> -->
+<script src="../../fui/js/login_utils.js"></script>
+<script src="../../flex_config.js?v=4.4"></script>
+<script src="./../../modules/login/js/login_all.js?v=4.4"></script>
+</html>

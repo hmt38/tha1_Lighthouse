@@ -110,11 +110,19 @@ class db:
 
     def get_ip_no_services_have_http(self, target):
         self.logger.debug("DB: get_ip_no_services_have_http %s" % (target,))
-        cursor = self.db.execute("SELECT IP,PORT from SERVICES WHERE METHOD NOT LIKE ? AND (PROTOCOL LIKE '%HTTP%' OR PROTOCOL LIKE '%HTTPS%')  LIMIT 1",
+        cursor = self.db.execute("SELECT IP,PORT,PROTOCOL from SERVICES WHERE (PROTOCOL LIKE '%HTTP%' OR PROTOCOL LIKE '%HTTPS%') AND METHOD NOT LIKE ?  LIMIT 1",
                                  ("%@#" + target + "%",))
         self.db.commit()
         for i in cursor:
-            return i[0], i[1]
+            return i[0], i[1], i[2]
+
+    def get_ip_to_schema(self,target):
+        self.logger.debug("DB: get_ip_no_services_have_http %s" % (target,))
+        cursor = self.db.execute(
+            "SELECT IP,PORT from SERVICES WHERE METHOD NOT LIKE ? AND (PROTOCOL LIKE '%HTTP%' OR PROTOCOL LIKE '%HTTPS%')  LIMIT 1",
+            ("%@#" + target + "%",))
+        self.db.commit()
+        return schema
 
 
     def add_honeypot(self, target1, target2):

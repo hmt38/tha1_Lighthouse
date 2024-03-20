@@ -63,4 +63,5 @@ OPTIONS有如下：
 
 `--scale` 如果你在并发执行，请在命令中加入该选项以随机启动时间
 
+`--webapp` 使用基于Dom树的算法识别网络框架，需要chromedirver
 

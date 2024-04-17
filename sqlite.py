@@ -5,11 +5,14 @@ class db:
     def __init__(self, logger):
         self.logger = logger
         import sqlite3
-        if not os.path.exists('sqlite.db'):
+        if not os.path.exists('database/sqlite.db') and not os.path.exists('/home/sqlite.db'):
             self.logger.info("Sqlite Database Not Exist...")
         else:
             self.logger.info("Connect Sqlite Database Succeed.")
-        self.db = sqlite3.connect('sqlite.db', isolation_level=None)
+        try:
+            self.db = sqlite3.connect('database/sqlite.db', isolation_level=None)
+        except:
+            self.db = sqlite3.connect('/home/sqlite.db', isolation_level=None)
         self.logger.info("Building Sqlite Database...")
         self.build()
         self.logger.info("Building Sqlite Database Succeed.")

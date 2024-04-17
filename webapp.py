@@ -42,7 +42,7 @@ class method_Dom:
             # filepath = "tmp/fscan/"
 
         # todo 提示用户输入
-        self.file = "C:\\xxxxx\\xxxx\\chrome.exe"
+        self.file = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
 
         self.logger.info("SERVICES: chrome binary found")
 

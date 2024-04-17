@@ -1,0 +1,122 @@
+version: '3'
+services:
+
+  scan:
+    image: cicsn
+    command: "python main.py --scan --scale --sqlite"
+    restart: always
+    deploy:
+      replicas: 1
+    volumes:
+      - .:/opt/
+      - /database:/home/
+  scan-fscan:
+    image: cicsn
+    command: "python main.py --scan scan-fscan --scale --sqlite"
+    restart: always
+    deploy:
+      replicas: 1
+    volumes:
+      - .:/opt/
+  port:
+    image: cicsn
+    command: "python main.py --port --scale --sqlite"
+    restart: always
+    deploy:
+      replicas: 1
+    volumes:
+      - .:/opt/
+  port-fscan:
+    image: cicsn
+    command: "python main.py --port port-fscan --scale --sqlite"
+    restart: always
+    deploy:
+      replicas: 1
+    volumes:
+      - .:/opt/
+  port-allscan:
+    image: cicsn
+    command: "python main.py --port port-allscan --scale --sqlite"
+    restart: always
+    deploy:
+      replicas: 1
+    volumes:
+      - .:/opt/
+  port-fofa:
+    image: cicsn
+    command: "python main.py --port port-fofa --scale --sqlite"
+    restart: always
+    deploy:
+      replicas: 1
+    environment:
+      - fofa_email=offical@szu.moe
+      - fofa_key=ThisIsFofaKey
+    volumes:
+      - .:/opt/
+  port-quake:
+    image: cicsn
+    command: "python csicn.py --port port-quake --scale --sqlite"
+    restart: always
+    deploy:
+      replicas: 1
+    environment:
+      - quake_key=ThisIsQuakeKey
+    volumes:
+      - .:/opt/
+  services:
+    image: cicsn
+    command: "python csicn.py --services --scale --sqlite"
+    restart: always
+    deploy:
+      replicas: 1
+    volumes:
+      - .:/opt/
+  services-fscan:
+    image: cicsn
+    command: "python csicn.py --services services-fscan-protocol --scale --sqlite"
+    restart: always
+    deploy:
+      replicas: 1
+    volumes:
+      - .:/opt/
+  honeypot:
+    image: cicsn
+    command: "python csicn.py --honeypot --scale --sqlite"
+    restart: always
+    deploy:
+      replicas: 1
+    environment:
+      - fofa_email=offical@szu.moe
+      - fofa_key=ThisIsFofaKey
+    volumes:
+      - .:/opt/
+  honeypot-quake:
+    image: cicsn
+    command: "python csicn.py --honeypot honeypot-quake --scale --sqlite"
+    restart: always
+    deploy:
+      replicas: 1
+    environment:
+      - quake_key=ThisIsQuakeKey
+    volumes:
+      - .:/opt/
+  honeypot-quake-dump:
+    image: cicsn
+    command: "python csicn.py --honeypot honeypot-quake-dump --scale --sqlite"
+    restart: always
+    deploy:
+      replicas: 1
+    environment:
+      - quake_dump_file=tmp/honeypot/
+    volumes:
+      - .:/opt/
+  output:
+    image: cicsn
+    command: "python csicn.py --output"
+    restart: always
+    deploy:
+      replicas: 0
+    volumes:
+      - .:/opt/
+
+

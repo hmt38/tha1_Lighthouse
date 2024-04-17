@@ -8,13 +8,19 @@ Lighthouse 灯塔，一个开源资产测绘平台
 支持mysql/sqlite，基于云的分布式高并发扫描
 
 ## cloud distributed scanning
-基于云的分布式扫描
+### 基于云的分布式扫描
 
+基于Mysql
 ```bash
 docker build -t cicsn .
 #在运行前先将dockerfile先build了
 docker-compose up -d
 #你可以更改其中的replicas参数来启用多个容器实现并发扫描
+```
+
+基于Sqlite
+```bash
+在写了
 ```
 
 ## Command
@@ -65,3 +71,16 @@ OPTIONS有如下：
 
 `--webapp` 使用基于Dom树的算法识别网络框架，需要chromedirver
 
+## ui前端
+
+### linux
+启动命令
+```angular2html
+cd ui
+docker build . -t ciscn_ui
+cd ..
+docker run -p yourport:8080 -d -v database:/home/ ciscn_ui 
+```
+### windows
+
+windows可以直接使用web.exe，请放置于main.py同级目录

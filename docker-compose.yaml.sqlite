@@ -18,6 +18,7 @@ services:
       replicas: 1
     volumes:
       - .:/opt/
+      - /database:/home/
   port:
     image: cicsn
     command: "python main.py --port --scale --sqlite"
@@ -26,6 +27,7 @@ services:
       replicas: 1
     volumes:
       - .:/opt/
+      - /database:/home/
   port-fscan:
     image: cicsn
     command: "python main.py --port port-fscan --scale --sqlite"
@@ -34,6 +36,7 @@ services:
       replicas: 1
     volumes:
       - .:/opt/
+      - /database:/home/
   port-allscan:
     image: cicsn
     command: "python main.py --port port-allscan --scale --sqlite"
@@ -42,6 +45,7 @@ services:
       replicas: 1
     volumes:
       - .:/opt/
+      - /database:/home/
   port-fofa:
     image: cicsn
     command: "python main.py --port port-fofa --scale --sqlite"
@@ -53,6 +57,7 @@ services:
       - fofa_key=ThisIsFofaKey
     volumes:
       - .:/opt/
+      - /database:/home/
   port-quake:
     image: cicsn
     command: "python csicn.py --port port-quake --scale --sqlite"
@@ -63,6 +68,7 @@ services:
       - quake_key=ThisIsQuakeKey
     volumes:
       - .:/opt/
+      - /database:/home/
   services:
     image: cicsn
     command: "python csicn.py --services --scale --sqlite"
@@ -71,6 +77,7 @@ services:
       replicas: 1
     volumes:
       - .:/opt/
+      - /database:/home/
   services-fscan:
     image: cicsn
     command: "python csicn.py --services services-fscan-protocol --scale --sqlite"
@@ -79,6 +86,7 @@ services:
       replicas: 1
     volumes:
       - .:/opt/
+      - /database:/home/
   honeypot:
     image: cicsn
     command: "python csicn.py --honeypot --scale --sqlite"
@@ -90,6 +98,7 @@ services:
       - fofa_key=ThisIsFofaKey
     volumes:
       - .:/opt/
+      - /database:/home/
   honeypot-quake:
     image: cicsn
     command: "python csicn.py --honeypot honeypot-quake --scale --sqlite"
@@ -100,6 +109,7 @@ services:
       - quake_key=ThisIsQuakeKey
     volumes:
       - .:/opt/
+      - /database:/home/
   honeypot-quake-dump:
     image: cicsn
     command: "python csicn.py --honeypot honeypot-quake-dump --scale --sqlite"
@@ -110,6 +120,7 @@ services:
       - quake_dump_file=tmp/honeypot/
     volumes:
       - .:/opt/
+      - /database:/home/
   output:
     image: cicsn
     command: "python csicn.py --output"
